@@ -7,6 +7,8 @@
       [cdkDropListData]="filteredSongs$ | async"
       cdkDropListConnectedTo="songbook"
       class="example-list">
-      <div class="example-box" *ngFor="let item of filteredSongs$ | async" cdkDrag>{{item}}</div>
+      <div class="example-box" *ngFor="let item of filteredSongs$ | async" cdkDrag [cdkDragData]="item">
+        {{item.name}}
+    </div>
     </div>
   </div>

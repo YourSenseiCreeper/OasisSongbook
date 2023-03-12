@@ -53,11 +53,13 @@ import {DialogModule} from '@angular/cdk/dialog';
 import { SongsCollectionSidenavComponent } from './songs-collection/songs-collection-sidenav/songs-collection-sidenav.component';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditSongStyleDialogComponent } from './songs-collection/edit-song-style-dialog/edit-song-style-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SongsCollectionSidenavComponent
+    SongsCollectionSidenavComponent,
+    EditSongStyleDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { map, Observable, startWith } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { Song } from 'src/app/model/song';
 
 @Component({
   selector: 'songs-collection-sidenav',
@@ -10,7 +11,50 @@ import { FormControl } from '@angular/forms';
 })
 export class SongsCollectionSidenavComponent {
   showFiller = false;
-  allSongs = ['Będę śpiewał Tobie', 'Jezus siłą mą', 'Im hashem', 'Oceans'];
+  allSongs: Song[] =
+  [
+    { id: 1, name: 'Uwielbiam imię Twoje Panie', text: [
+        'Uwielbiam imię Twoje Panie',
+        'Wywyższam Cię i daję Ci hodł',
+        'W przedsionku chwały Twej staję',
+        'Z radością śpiewam Ci pieśń',
+        ' ',
+        'O Panie Jezu, chcę wyznać że',
+        'Ja kocham Ciebie, Ty zmieniasz mnie',
+        'Chcę Ci dziękować ze wszystkich sił',
+        'Dajesz mi Siebie bym na wieki żył'
+    ]},
+    { id: 2, name: 'Jezus siłą mą', text: [
+        "Jezus daje nam zbawienie",
+        "Jezus daje pokój nam",
+        "Jemu składam dziękczynienie",
+        "chwałę z serca mego dam",
+        " ",
+        "ref. Jezus siłą mą, Jezus pieśnią mego życia",
+        "Królem wiecznym On, niepojęty w mocy swej",
+        "w Nim znalazłem to, czego szukałem do dzisiaj",
+        "sam mi podał dłoń, bym zwyciężał w każdy dzień",
+        " ",
+        "W Jego ranach uzdrowienie",
+        "W Jego śmierci życia dar",
+        "Jego krew to oczyszczenie",
+        "Jego życie chwałą nam"
+    ]},
+    { id: 3, name: 'Im hashem', text: []},
+    { id: 4, name: 'Niechaj zstąpi duch twój', text: [
+        "Niechaj zstąpi Duch Twój",
+        "i odnowi ziemię.",
+        "Życiodajny spłynie deszcz",
+        "na spragnione serce",
+        "Obmyj mnie i uświęć mnie",
+        "uwielbienia niech popłynie pieśń",
+        "Chwała Jezusowi",
+        "który za mnie życie dał.",
+        "Chwała Temu",
+        "który pierwszy umiłował mnie.",
+        "Jezus, tylko Jezus Panem jest"
+    ]}
+  ];
 
   songnameInput = new FormControl('');
   showedSongs: string[] = [];
@@ -28,7 +72,7 @@ export class SongsCollectionSidenavComponent {
     }
   }
 
-  filteredSongs$: Observable<string[]>;
+  filteredSongs$: Observable<Song[]>;
 
   ngOnInit() {
     this.filteredSongs$ = this.songnameInput.valueChanges.pipe(
@@ -37,9 +81,9 @@ export class SongsCollectionSidenavComponent {
     );
   }
 
-  private _filter(value: string): string[] {
+  private _filter(value: string): Song[] {
     const filterValue = value.toLowerCase();
 
-    return this.allSongs.filter(song => song.toLowerCase().includes(filterValue));
+    return this.allSongs.filter(song => song.name.toLowerCase().includes(filterValue));
   }
 }
