@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OasisSongbookBackend.WebApi", "OasisSongbookBackend.WebApi\OasisSongbookBackend.WebApi.csproj", "{83EE86EB-ACB5-4E36-A5C2-C92B69E8A3D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OasisSongbook.Business", "OasisSongbook.Business\OasisSongbook.Business.csproj", "{85CBD676-A466-4BAC-AC33-26124C8F2F83}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83EE86EB-ACB5-4E36-A5C2-C92B69E8A3D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83EE86EB-ACB5-4E36-A5C2-C92B69E8A3D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83EE86EB-ACB5-4E36-A5C2-C92B69E8A3D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83EE86EB-ACB5-4E36-A5C2-C92B69E8A3D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85CBD676-A466-4BAC-AC33-26124C8F2F83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85CBD676-A466-4BAC-AC33-26124C8F2F83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85CBD676-A466-4BAC-AC33-26124C8F2F83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85CBD676-A466-4BAC-AC33-26124C8F2F83}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E15C1DB-C769-4867-8E73-DAA295C4175A}
+	EndGlobalSection
+EndGlobal
