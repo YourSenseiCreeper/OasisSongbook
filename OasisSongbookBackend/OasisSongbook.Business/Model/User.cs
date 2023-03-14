@@ -10,5 +10,6 @@ namespace OasisSongbook.Business.Model
         public string PasswordHash { get; set; }
         public bool IsActive { get; set; }
         public UserRole Role { get; set; }
+        public List<Songbook.Songbook> Songbooks { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using OasisSongbook.Business.Model.Enum;
+﻿using OasisSongbook.Business.Model.Enum;
 
 namespace OasisSongbook.Business.Model.Songbook.Dto
 {
@@ -9,14 +8,5 @@ namespace OasisSongbook.Business.Model.Songbook.Dto
         public string Title { get; set; }
         public SongbookLayout Layout { get; set; }
         public List<SongbookEntryDto> Entries { get; set; }
-
-        public Songbook ToSongbook()
-        {
-            return new Songbook
-            {
-                _id = ObjectId.GenerateNewId(),
-                
-            }
-        }
     }
 }

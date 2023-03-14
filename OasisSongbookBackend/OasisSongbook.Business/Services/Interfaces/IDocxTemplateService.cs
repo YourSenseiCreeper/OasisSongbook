@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OasisSongbook.Business.Model.Songbook;
 
 namespace OasisSongbook.Business.Services.Interfaces
 {
     public interface IDocxTemplateService
     {
-        void Test();
+        void Generate(string userId, Songbook songbook);
     }
 }

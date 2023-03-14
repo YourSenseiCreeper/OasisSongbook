@@ -1,10 +1,15 @@
-using OasisSongbook.Business.Services;
-using OasisSongbook.Business.Services.Interfaces;
+using OasisSongbook.Business;
+using OasisSongbook.Business.Context;
+using OasisSongbook.Business.Services.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Options
+builder.Configuration.Bind(new DocxTemplateServiceOptions());
+builder.Configuration.Bind(new OasisSongbookNoSqlOptions());
+
 // Add services to the container.
-builder.Services.AddScoped<IDocxTemplateService, DocxTemplateService>();
+builder.Services.AddBusiness();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

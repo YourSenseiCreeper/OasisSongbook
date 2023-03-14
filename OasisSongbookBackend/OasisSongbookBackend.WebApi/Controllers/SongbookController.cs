@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 using OasisSongbook.Business.Context;
-using OasisSongbook.Business.Model.Songbook;
+using OasisSongbook.Business.Mappers;
+using OasisSongbook.Business.Model;
 using OasisSongbook.Business.Model.Songbook.Dto;
 using OasisSongbook.Business.Services.Interfaces;
+using OasisSongbookBackend.WebApi.Commands.Songbook;
 
 namespace OasisSongbookBackend.WebApi.Controllers
 {
@@ -22,10 +25,18 @@ namespace OasisSongbookBackend.WebApi.Controllers
             _docxTemplateService = docxTemplateService;
         }
 
-        [HttpGet("{songbookId}")]
-        public ActionResult Generate(int songbookId)
+        [HttpPost("generate")]
+        public async Task<ActionResult> Generate([FromBody] GenerateSongbookCommand command)
         {
-            _docxTemplateService.Test();
+            var user = await _context.Users.Get(command.UserId);
+            if (user == null)
+                return new BadRequestObjectResult($"Not found user with id: '{command.UserId}'");
+
+            var songbook = user.Songbooks.FirstOrDefault(s => s._id == command.SongbookId);
+            if (songbook == null)
+                return new BadRequestObjectResult($"Not found songbook with id: '{command.SongbookId}'");
+
+            _docxTemplateService.Generate(command.UserId, songbook);
             return new OkResult();
         }
 
@@ -33,17 +44,16 @@ namespace OasisSongbookBackend.WebApi.Controllers
         public async Task<ActionResult> Create([FromBody] CreateSongbookDto command)
         {
             // current user Id z requesta
-            var user = _context.Users.Get(command.UserId);
+            var user = await _context.Users.Get(command.UserId);
             if (user == null)
                 return new BadRequestObjectResult($"Not found user with id: '{command.UserId}'");
 
-            var songbook = new Songbook
-            {
-                _id = new ObjectId
-                Title = command.Title,
-                Layout = command.Layout,
-                Entries = command.Entries.Select(e => new SongbookEntry { SongId = e.SongId, CustomStyleOptions = e.CustomStyleOptions }).ToList()
-            }
+            var songbook = command.ToSongbook();
+            var filter = Builders<User>.Filter.Eq(u => u._id, command.UserId);
+            var update = Builders<User>.Update.AddToSet(nameof(OasisSongbook.Business.Model.User.Songbooks), songbook);
+            await _context.Users.Update(filter, update);
+
+            return new OkResult();
         }
     }
 }
