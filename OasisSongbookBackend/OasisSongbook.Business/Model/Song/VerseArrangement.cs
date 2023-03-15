@@ -3,7 +3,7 @@
     public class VerseArrangement
     {
         public string _id { get; set; }
-        public int VerseIndex { get; set; }
+        public int VerseIndex { get; set; } // pomyśleć nad inną formą identyfikacji, może przez _id
         // Bicie
         public List<VerseArrangementEntry> Entries { get; set; }
     }

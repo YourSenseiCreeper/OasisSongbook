@@ -30,11 +30,9 @@ namespace OasisSongbookBackend.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<UserWithoutHistoryDto>> GetAll()
+        public async Task<IEnumerable<User>> GetAll()
         {
-            //var users = await _context.UsersWithoutHistory.GetAll();
-            //return users;
-            throw new NotImplementedException();
+            return await _context.Users.GetAll();
         }
 
         [HttpGet("{id}")]

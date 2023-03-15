@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using OasisSongbook.Business.Context;
 using OasisSongbook.Business.Mappers;
 using OasisSongbook.Business.Model;
+using OasisSongbook.Business.Model.Songbook;
 using OasisSongbook.Business.Model.Songbook.Dto;
 using OasisSongbook.Business.Services.Interfaces;
 using OasisSongbookBackend.WebApi.Commands.Songbook;
@@ -10,7 +11,7 @@ using OasisSongbookBackend.WebApi.Commands.Songbook;
 namespace OasisSongbookBackend.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("songbook")]
     public class SongbookController : ControllerBase
     {
         private readonly ILogger<SongbookController> _logger;
@@ -36,7 +37,18 @@ namespace OasisSongbookBackend.WebApi.Controllers
             if (songbook == null)
                 return new BadRequestObjectResult($"Not found songbook with id: '{command.SongbookId}'");
 
-            _docxTemplateService.Generate(command.UserId, songbook);
+            var songIds = songbook.Entries.Select(e => e.SongId).ToHashSet();
+            var songs = await _context.Song.GetAll();
+            songs = songs.Where(s => songIds.Contains(s._id)).ToList();
+
+            var fullSongbook = new FullSongbook
+            {
+                _id = command.SongbookId,
+                Title = songbook.Title,
+                Layout = songbook.Layout,
+                Entries = songs.Select(s => new FullSongbookEntry { Song = s }).ToList()
+            };
+            _docxTemplateService.Generate(command.UserId, fullSongbook);
             return new OkResult();
         }
 

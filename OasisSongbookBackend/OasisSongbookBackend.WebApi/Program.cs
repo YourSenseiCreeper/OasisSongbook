@@ -5,8 +5,11 @@ using OasisSongbook.Business.Services.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 // Options
-builder.Configuration.Bind(new DocxTemplateServiceOptions());
-builder.Configuration.Bind(new OasisSongbookNoSqlOptions());
+builder.Services.Configure<DocxTemplateServiceOptions>(builder.Configuration.GetSection(nameof(DocxTemplateServiceOptions)));
+builder.Services.Configure<OasisSongbookNoSqlOptions>(builder.Configuration.GetSection(nameof(OasisSongbookNoSqlOptions)));
+
+//builder.Services.AddOptions<DocxTemplateServiceOptions>().Bind(builder.Configuration);
+//builder.Services.AddOptions<OasisSongbookNoSqlOptions>().Bind(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddBusiness();

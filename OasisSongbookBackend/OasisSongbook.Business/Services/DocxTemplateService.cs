@@ -22,18 +22,18 @@ namespace OasisSongbook.Business.Services
             _fileService = fileService;
         }
 
-        public void Generate(string userId, Songbook songbook)
+        public void Generate(string userId, FullSongbook fullSongbook)
         {
             var outputPath = $"{_options.OutputPath}/{userId}";
             _fileService.CreateFolderIfNotExist(outputPath);
 
-            var sterilizedSongbookName = _fileService.SterilizeFileName(songbook.Title);
+            var sterilizedSongbookName = _fileService.SterilizeFileName(fullSongbook.Title);
             var outputFilePath = $"{outputPath}/{sterilizedSongbookName}.docx";
 
             try
             {
-                var document = DocumentFactory.Create(_options.OneColumnTemplatePath, songbook);
-                document.Generate(outputFilePath, songbook);
+                var document = DocumentFactory.Create(_options.OneColumnTemplatePath, fullSongbook);
+                document.Generate(outputFilePath, fullSongbook);
             }
             catch (Exception ex)
             {
