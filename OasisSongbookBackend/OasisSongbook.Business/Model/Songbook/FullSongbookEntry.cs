@@ -2,7 +2,8 @@
 {
     public class FullSongbookEntry
     {
-        public Song.Song Song { get; set; }
+        public string Title { get; set; }
+        public List<ExportVerse> Verses { get; set; }
         public Dictionary<string, string> CustomStyleOptions { get; set; }
     }
 }

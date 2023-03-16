@@ -6,6 +6,7 @@ namespace OasisSongbook.Business.Model.Song
     {
         public string _id { get; set; }
         public ArrangementType Type { get; set; }
+        // Bicie - jako dodatkowa opcja w dictionary
         public List<VerseArrangement> Verse { get; set; }
     }
 }

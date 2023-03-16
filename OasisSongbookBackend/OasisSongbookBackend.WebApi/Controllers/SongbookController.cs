@@ -3,6 +3,8 @@ using MongoDB.Driver;
 using OasisSongbook.Business.Context;
 using OasisSongbook.Business.Mappers;
 using OasisSongbook.Business.Model;
+using OasisSongbook.Business.Model.Enum;
+using OasisSongbook.Business.Model.Song;
 using OasisSongbook.Business.Model.Songbook;
 using OasisSongbook.Business.Model.Songbook.Dto;
 using OasisSongbook.Business.Services.Interfaces;
@@ -46,10 +48,37 @@ namespace OasisSongbookBackend.WebApi.Controllers
                 _id = command.SongbookId,
                 Title = songbook.Title,
                 Layout = songbook.Layout,
-                Entries = songs.Select(s => new FullSongbookEntry { Song = s }).ToList()
+                Entries = songs.Select(s => new FullSongbookEntry {
+                    Title = s.Title,
+                    Verses = GetExportVerses(s, ArrangementType.Guitar) }
+                ).ToList()
             };
-            _docxTemplateService.Generate(command.UserId, fullSongbook);
-            return new OkResult();
+            var response = _docxTemplateService.Generate(command.UserId, fullSongbook);
+
+            return File(response.Data, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", response.Filename);
+        }
+
+        private List<ExportVerse> GetExportVerses(Song song, ArrangementType arrangementType)
+        {
+            var verses = new List<ExportVerse>();
+            for(int i = 0; i < song.Verses.Count; i++)
+            {
+                var lines = new List<ExportLine>();
+                for(int j = 0; j < song.Verses[i].Lines.Count; j++)
+                {
+                    var arrangementAsInt = (int)arrangementType;
+                    lines.Add(new ExportLine
+                    {
+                        Text = song.Verses[i].Lines[j].Text,
+                        Notes = string.Join(" ", song.Arrangements[arrangementAsInt].Verse[i].Entries.Select(e => e.Note))
+                    });
+                }
+                verses.Add(new ExportVerse
+                {
+                    Lines = lines
+                });
+            }
+            return verses;
         }
 
         [HttpPost]

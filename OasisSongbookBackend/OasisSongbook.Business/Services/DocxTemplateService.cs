@@ -22,23 +22,27 @@ namespace OasisSongbook.Business.Services
             _fileService = fileService;
         }
 
-        public void Generate(string userId, FullSongbook fullSongbook)
+        public SongbookGenerateResponse Generate(string userId, FullSongbook fullSongbook)
         {
             var outputPath = $"{_options.OutputPath}/{userId}";
             _fileService.CreateFolderIfNotExist(outputPath);
 
             var sterilizedSongbookName = _fileService.SterilizeFileName(fullSongbook.Title);
-            var outputFilePath = $"{outputPath}/{sterilizedSongbookName}.docx";
+            var fileName = sterilizedSongbookName + ".docx";
 
             try
             {
                 var document = DocumentFactory.Create(_options.OneColumnTemplatePath, fullSongbook);
-                document.Generate(outputFilePath, fullSongbook);
+                document.Generate($"{outputPath}/{fileName}", fullSongbook);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), outputPath, fileName);
+                return new SongbookGenerateResponse { Filename = fileName, Data = File.ReadAllBytes(filePath) };
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Thrown exception");
             }
+
+            return null;
         }
     }
 }

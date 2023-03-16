@@ -5,7 +5,7 @@ namespace OasisSongbook.Business.Services
 {
     public class FileService : IFileService
     {
-        private static readonly Regex ForbiddenFileSymbols = new("(<|>|:|\"|/|\\|/||/?|/*)");
+        private static readonly Regex ForbiddenFileSymbols = new(@"(<|>|:|\""|/|\||\?|\*)");
         private static readonly Regex DotAtTheEnd = new("/.$");
         private static readonly string[] ForbiddenFolderNames = new[] {
             "CON", "PRN", "AUX", "NUL", "COM1", "COM2",

@@ -4,6 +4,6 @@ namespace OasisSongbook.Business.Services.Interfaces
 {
     public interface IDocxTemplateService
     {
-        void Generate(string userId, FullSongbook songbook);
+        SongbookGenerateResponse Generate(string userId, FullSongbook songbook);
     }
 }
