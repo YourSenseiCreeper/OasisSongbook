@@ -9,7 +9,7 @@ namespace OasisSongbook.Business
     {
         public static void AddBusiness(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<OasisSongbookNoSqlContext>();
+            serviceCollection.AddScoped<OasisSongbookNoSqlContext>();
 
             serviceCollection.AddScoped<IDocxTemplateService, DocxTemplateService>();
             serviceCollection.AddScoped<IFileService, FileService>();
