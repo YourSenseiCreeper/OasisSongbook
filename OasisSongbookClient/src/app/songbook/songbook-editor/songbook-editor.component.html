@@ -1,0 +1,14 @@
+<div class="example-container">
+    <input type="text" matInput [formControl]="songnameInput" placeholder="Nazwa piosenki" autocomplete="off">
+    <div
+      cdkDropList
+      id="allsongsList"
+      #allsongsList="cdkDropList"
+      [cdkDropListData]="filteredSongs$ | async"
+      cdkDropListConnectedTo="songbook"
+      class="example-list">
+      <div class="example-box" *ngFor="let item of filteredSongs$ | async" cdkDrag [cdkDragData]="item">
+        {{item.title}}
+    </div>
+    </div>
+  </div>

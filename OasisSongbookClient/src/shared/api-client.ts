@@ -1165,14 +1165,14 @@ export interface IModificationHistoryEntry {
 }
 
 export class Song implements ISong {
-    _id!: string | undefined;
-    title!: string | undefined;
-    author!: string | undefined;
-    authorId!: string | undefined;
-    modificationHistory!: ModificationHistoryEntry[] | undefined;
-    suggestedBmp!: number;
-    verses!: Verse[] | undefined;
-    arrangements!: Arrangement[] | undefined;
+    _id: string;
+    title: string;
+    author: string;
+    authorId: string;
+    modificationHistory: ModificationHistoryEntry[];
+    suggestedBmp: number;
+    verses: Verse[];
+    arrangements: Arrangement[];
 
     constructor(data?: ISong) {
         if (data) {

@@ -1,0 +1,50 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <songs-collection-sidenav></songs-collection-sidenav>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <div class="action-menu">
+      <button type="button" mat-raised-button color="primary" (click)="drawer.toggle()">
+        <mat-icon>list</mat-icon>
+      </button>
+    </div>
+    
+    <h2>Twój śpiewnik</h2>
+
+    <div
+      id="songbook"
+      cdkDropList
+      #songbook="cdkDropList"
+      [cdkDropListData]="selectedSongs"
+      [cdkDropListConnectedTo]="['allsongsList']"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of selectedSongs; let i = index" cdkDrag>
+        <div class="header">
+          <span class="title">{{ i+1 }}. {{item.title}}</span>
+          <div class="menu">
+            <mat-icon class="edit" (click)="editSongStyle(item._id!)">edit</mat-icon>
+            <mat-icon class="delete" (click)="deleteFromSongbook(item.title!)">delete</mat-icon>
+          </div>
+        </div>
+        <div class="song-content">
+          <div class="verse" *ngFor="let verse of item.verses; let verseIndex = index">
+            <div class="line" *ngFor="let line of verse.lines; let lineIndex = index">
+              <!-- <div class="arrangement">
+                <span>{{ getArrangementForLine(item, lineIndex) }}</span>
+              </div> -->
+              <div class="text">
+                <span>{{ line.text }} <i *ngIf="line.repetitions > 1">/x{{ line.repetitions }}</i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="example-list"></div>
+    <div class="example-list"></div>
+
+  </div>
+</mat-drawer-container>

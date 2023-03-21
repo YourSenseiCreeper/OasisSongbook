@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Dialog } from '@angular/cdk/dialog';
-import { EditSongStyleDialogComponent } from './songs-collection/edit-song-style-dialog/edit-song-style-dialog.component';
 import { Song } from 'src/shared/api-client';
+import { EditSongStyleDialogComponent } from '../songs-collection/edit-song-style-dialog/edit-song-style-dialog.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'songbook',
+  templateUrl: './songbook.component.html',
+  styleUrls: ['./songbook.component.scss']
 })
-export class AppComponent {
+export class SongbookComponent {
   showFiller = false;
   selectedSongs: Song[] = [];
 
