@@ -54,6 +54,7 @@ import { SongsCollectionSidenavComponent } from './songs-collection/songs-collec
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditSongStyleDialogComponent } from './songs-collection/edit-song-style-dialog/edit-song-style-dialog.component';
+import { SharedModule } from 'src/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { EditSongStyleDialogComponent } from './songs-collection/edit-song-style
   ],
   imports: [
     BrowserModule,
+    SharedModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSidenavModule,

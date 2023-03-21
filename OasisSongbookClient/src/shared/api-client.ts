@@ -44,6 +44,7 @@ export class Service {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
             })
         };
 
@@ -81,6 +82,65 @@ export class Service {
     }
 
     /**
+     * @return Success
+     */
+    songGetAll(): Observable<Song[]> {
+        let url_ = this.baseUrl + "/song";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain",
+                "Access-Control-Allow-Origin": "*",
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSongGetAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSongGetAll(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<Song[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<Song[]>;
+        }));
+    }
+
+    protected processSongGetAll(response: HttpResponseBase): Observable<Song[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(Song.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Song[]>([]);
+    }
+
+    /**
      * @param songId (optional) 
      * @return Success
      */
@@ -99,7 +159,8 @@ export class Service {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "text/plain"
+                "Accept": "text/plain",
+                'Access-Control-Allow-Origin': "*",
             })
         };
 
@@ -246,7 +307,7 @@ export class Service {
     /**
      * @return Success
      */
-    usersGet(): Observable<User[]> {
+    usersGetAll(): Observable<User[]> {
         let url_ = this.baseUrl + "/users";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -259,11 +320,11 @@ export class Service {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processUsersGet(response_);
+            return this.processUsersGetAll(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processUsersGet(response_ as any);
+                    return this.processUsersGetAll(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<User[]>;
                 }
@@ -272,7 +333,7 @@ export class Service {
         }));
     }
 
-    protected processUsersGet(response: HttpResponseBase): Observable<User[]> {
+    protected processUsersGetAll(response: HttpResponseBase): Observable<User[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -298,7 +359,7 @@ export class Service {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<User[]>(null as any);
+        return _observableOf<User[]>([]);
     }
 
     /**
@@ -1647,7 +1708,6 @@ export interface IVerseArrangementEntry {
 }
 
 export class ApiException extends Error {
-    message: string;
     status: number;
     response: string;
     headers: { [key: string]: any; };
