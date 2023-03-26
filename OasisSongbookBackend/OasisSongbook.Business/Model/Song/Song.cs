@@ -9,6 +9,6 @@
         public List<ModificationHistoryEntry> ModificationHistory { get; set; }
         public int SuggestedBmp { get; set; }
         public List<Verse> Verses { get; set; }
-        public List<Arrangement> Arrangements { get; set; }
+        public List<string> Arrangements { get; set; }
     }
 }

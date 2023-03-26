@@ -3,6 +3,6 @@
     public class CreateVerseArrangementDto
     {
         public int VerseIndex { get; set; }
-        public List<VerseArrangementEntry> Entries { get; set; }
+        public List<ArrangementEntry> Entries { get; set; }
     }
 }

@@ -1,0 +1,22 @@
+[
+    {
+        "_id": "64208269675046ae30115fda",
+        "Title": "Testowy śpiewnik",
+        "AuthorId": "64208269675046ae30113fda",
+        "Layout": 0,
+        "DocxFilesUrls": [],
+        "ShareUrl": null,
+        "Entries": [
+            {
+                "_id": "64208269675046ae30114fdb",
+                "SongId": "64208269675046ae30113fdb",
+                "CustomStyleOptions": null
+            },
+            {
+                "_id": "64208269675046ae30114fdc",
+                "SongId": "64208269675046ae30113fdc",
+                "CustomStyleOptions": null
+            }
+        ]
+    }
+]

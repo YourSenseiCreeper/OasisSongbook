@@ -25,17 +25,6 @@ namespace OasisSongbook.Business.Mappers
                         Repetitions = l.Repetitions,
                         RepetitionsInVerse = l.RepetitionsInVerse
                     }).ToList()
-                }).ToList(),
-                Arrangements = songDto.Arrangements.Select(a => new Arrangement
-                {
-                    _id = ObjectId.GenerateNewId().ToString(),
-                    Type = a.Type,
-                    Verse = a.Verse.Select(v => new VerseArrangement
-                    {
-                        _id = ObjectId.GenerateNewId().ToString(),
-                        VerseIndex = v.VerseIndex,
-                        Entries = v.Entries
-                    }).ToList(),
                 }).ToList()
             };
         }

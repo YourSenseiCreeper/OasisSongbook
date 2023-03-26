@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Dialog } from '@angular/cdk/dialog';
-import { Song, SongbookService } from 'src/shared/api-client';
+import { AppendToSongbookCommand, ArrangementEntry, ReorderCommand, Song, SongbookService } from 'src/shared/api-client';
 import { EditSongStyleDialogComponent } from '../songs-collection/edit-song-style-dialog/edit-song-style-dialog.component';
+import { API_CURRENT_SONGBOOK_ID, API_CURRENT_USER_ID } from 'src/shared/environment-consts';
 
 @Component({
   selector: 'songbook',
@@ -13,11 +14,21 @@ export class SongbookComponent {
   showFiller = false;
   selectedSongs: Song[] = [];
 
-  constructor(public dialog: Dialog, private service: SongbookService) { }
+  constructor(public dialog: Dialog,
+    private service: SongbookService,
+    @Inject(API_CURRENT_USER_ID) private currentUserId?: string,
+    @Inject(API_CURRENT_SONGBOOK_ID) private currentSongbookId?: string) { }
 
   drop(event: CdkDragDrop<Song[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      let reorderCommand = {
+        songbookId: this.currentSongbookId,
+        userId: this.currentUserId,
+        songId: event.container.data[event.previousIndex]._id,
+        newOrder: event.currentIndex
+      } as ReorderCommand;
+      this.service.reorder(reorderCommand);
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -25,9 +36,19 @@ export class SongbookComponent {
         event.previousIndex,
         event.currentIndex,
       );
+      let appendCommand = {
+        songbookId: this.currentSongbookId,
+        userId: this.currentUserId,
+        songId: event.container.data[event.currentIndex]._id,
+        order: event.currentIndex
+      } as AppendToSongbookCommand;
+      this.service.append(appendCommand);
     }
 
-    // this.service.generate()
+  }
+
+  getArrangement(arrangement: ArrangementEntry[]): string {
+    return arrangement.map(e => e.note!).reduce((sum, entry) => sum += ` ${entry}`);
   }
 
   // getArrangementForLine(song: Song, verseIndex: number, lineIndex: number): string {

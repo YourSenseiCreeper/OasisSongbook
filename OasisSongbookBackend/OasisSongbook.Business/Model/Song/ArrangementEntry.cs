@@ -1,6 +1,6 @@
 ﻿namespace OasisSongbook.Business.Model.Song
 {
-    public class VerseArrangementEntry
+    public class ArrangementEntry
     {
         public int StartIndex { get; set; }
         public string Note { get; set; }

@@ -1,0 +1,11 @@
+[
+    {
+        "_id": "64208269675046ae30113fda",
+        "Name": "admin",
+        "Email": "admin@oasissongbook.pl",
+        "Password": "123qwe",
+        "IsActive": true,
+        "Role": 2,
+        "Songbooks": []
+    }
+]

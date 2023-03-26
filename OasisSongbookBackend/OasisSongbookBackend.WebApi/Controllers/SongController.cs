@@ -24,21 +24,21 @@ namespace OasisSongbookBackend.WebApi.Controllers
         {
             // current user Id z requesta
             var song = SongMappers.ToSong(command);
-            await _context.Song.Add(song);
+            await _context.Songs.Add(song);
             return new OkResult();
         }
 
         [HttpGet]
         public async Task<IEnumerable<Song>> GetAll()
         {
-            var songs = await _context.Song.GetAll();
+            var songs = await _context.Songs.GetAll();
             return songs;
         }
 
         [HttpGet("{id}")]
         public async Task<Song> Get(string songId)
         {
-            var song = await _context.Song.Get(songId);
+            var song = await _context.Songs.Get(songId);
             return song;
         }
     }

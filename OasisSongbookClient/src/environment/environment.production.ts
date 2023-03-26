@@ -1,6 +1,6 @@
 export const environment = {
-    production: false,
+    production: true,
     baseApiUrl: 'https://localhost:7012',
-    currentUserId: '6410d058c34b7e6fcd6754a2',
+    currentUserId: '64208269675046ae30113fda',
     currentSongbookId: '64208269675046ae30115fda'
 };

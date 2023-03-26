@@ -1,5 +1,4 @@
-using DocumentFormat.OpenXml.Spreadsheet;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using OasisSongbook.Business.Context;
@@ -31,6 +30,18 @@ namespace OasisSongbookBackend.WebApi.Controllers
             _docxTemplateService = docxTemplateService;
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetById(string songbookId)
+        {
+            // pobranie current user id i sprawdzenie czy ma dostęp 
+            var songbook = await _context.Songbooks.Get(songbookId);
+            if (songbook == null)
+                return new BadRequestObjectResult($"Not found songbook with id: '{songbookId}'");
+
+            songbook.Entries = songbook.Entries.OrderBy(e => e.Order).ToList();
+            return Ok(songbook);
+        }
+
         [HttpPost("append")]
         public async Task<ActionResult> AppendToSongbook([FromBody] AppendToSongbookCommand command)
         {
@@ -39,11 +50,11 @@ namespace OasisSongbookBackend.WebApi.Controllers
             if (user == null)
                 return new BadRequestObjectResult($"Not found user with id: '{command.UserId}'");
 
-            var song = await _context.Song.Get(command.SongId);
+            var song = await _context.Songs.Get(command.SongId);
             if (song == null)
                 return new BadRequestObjectResult($"Not found song with id: '{command.SongId}'");
 
-            var songbook = user.Songbooks.FirstOrDefault(s => s._id == command.SongbookId);
+            var songbook = await _context.Songbooks.Get(command.SongbookId);
             if (songbook == null)
                 return new BadRequestObjectResult($"Not found songbook with id: '{command.SongbookId}'");
 
@@ -53,24 +64,9 @@ namespace OasisSongbookBackend.WebApi.Controllers
                 SongId = command.SongId,
             };
 
-            var filter = Builders<User>.Filter.Eq(u => u._id, command.UserId);
-            var update = Builders<User>.Update.Set<List<Songbook>>(f => f.Songbooks, songbook).Set<SongbookEntry>();
-            _context.Users.update(
-                    {
-                                "_id": 5
-                    },
-                    {
-                        $set: { 'Vehicles.$[v].Parts.$[p].Name': 'Tyre' }
-                            },
-                    {
-                            arrayFilters:
-                                [
-                                { 'v._id': { $eq: 17 } },
-                            { 'p._id': { $eq: 34 } }
-                        ]
-                    }
-                )
-            await _context.Users.Update(filter, update);
+            var filter = Builders<Songbook>.Filter.Eq(u => u._id, command.UserId);
+            var update = Builders<Songbook>.Update.AddToSet(nameof(Songbook.Entries), newEntry);
+            await _context.Songbooks.Update(filter, update);
 
             return new OkResult();
         }
@@ -78,13 +74,57 @@ namespace OasisSongbookBackend.WebApi.Controllers
         [HttpPost("remove")]
         public async Task<ActionResult> RemoveFromSongbook([FromBody] RemoveFromSongbookCommand command)
         {
+            //current user
+            var user = await _context.Users.Get(command.UserId);
+            if (user == null)
+                return new BadRequestObjectResult($"Not found user with id: '{command.UserId}'");
 
+            var song = await _context.Songs.Get(command.SongId);
+            if (song == null)
+                return new BadRequestObjectResult($"Not found song with id: '{command.SongId}'");
+
+            var songbook = await _context.Songbooks.Get(command.SongbookId);
+            if (songbook == null)
+                return new BadRequestObjectResult($"Not found songbook with id: '{command.SongbookId}'");
+
+            var entry = songbook.Entries.FirstOrDefault(e => e.SongId == command.SongId);
+            if (entry == null)
+                return new BadRequestObjectResult($"Not found song with id: '{command.SongId}' in songbook {command.SongbookId}");
+
+            var filter = Builders<Songbook>.Filter.Eq(u => u._id, command.UserId);
+            var update = Builders<Songbook>.Update.Pull(nameof(Songbook.Entries), entry);
+            await _context.Songbooks.Update(filter, update);
+
+            return new OkResult();
         }
 
         [HttpPost("reorder")]
         public async Task<ActionResult> Reorder([FromBody] ReorderCommand command)
         {
+            //current user
+            var user = await _context.Users.Get(command.UserId);
+            if (user == null)
+                return new BadRequestObjectResult($"Not found user with id: '{command.UserId}'");
 
+            var song = await _context.Songs.Get(command.SongId);
+            if (song == null)
+                return new BadRequestObjectResult($"Not found song with id: '{command.SongId}'");
+
+            var songbook = await _context.Songbooks.Get(command.SongbookId);
+            if (songbook == null)
+                return new BadRequestObjectResult($"Not found songbook with id: '{command.SongbookId}'");
+
+            var entry = songbook.Entries.FirstOrDefault(e => e.SongId == command.SongId);
+            if (entry == null)
+                return new BadRequestObjectResult($"Not found song with id: '{command.SongId}' in songbook {command.SongbookId}");
+
+            var filter = Builders<Songbook>.Filter.Eq(u => u._id, command.UserId);
+            var update = Builders<Songbook>.Update.Pull(nameof(Songbook.Entries), entry);
+            await _context.Songbooks.Update(filter, update);
+
+            // podwójny update ?
+
+            return new OkResult();
         }
 
         [HttpPost("generate")]
@@ -99,7 +139,7 @@ namespace OasisSongbookBackend.WebApi.Controllers
                 return new BadRequestObjectResult($"Not found songbook with id: '{command.SongbookId}'");
 
             var songIds = songbook.Entries.Select(e => e.SongId).ToHashSet();
-            var songs = await _context.Song.GetAll();
+            var songs = await _context.Songs.GetAll();
             songs = songs.Where(s => songIds.Contains(s._id)).ToList();
 
             var fullSongbook = new FullSongbook
@@ -119,24 +159,16 @@ namespace OasisSongbookBackend.WebApi.Controllers
 
         private List<ExportVerse> GetExportVerses(Song song, ArrangementType arrangementType)
         {
-            var verses = new List<ExportVerse>();
-            for(int i = 0; i < song.Verses.Count; i++)
+            var verses = song.Verses.Select(v => new ExportVerse
             {
-                var lines = new List<ExportLine>();
-                for(int j = 0; j < song.Verses[i].Lines.Count; j++)
+                Lines = v.Lines.Select(l => new ExportLine
                 {
-                    var arrangementAsInt = (int)arrangementType;
-                    lines.Add(new ExportLine
-                    {
-                        Text = song.Verses[i].Lines[j].Text,
-                        Notes = string.Join(" ", song.Arrangements[arrangementAsInt].Verse[i].Entries.Select(e => e.Note))
-                    });
-                }
-                verses.Add(new ExportVerse
-                {
-                    Lines = lines
-                });
-            }
+                    Text = l.Text,
+                    Notes = string.Join(" ", l.GuitarArrangement.Select(a => a.Note)),
+                    Repetitions = l.Repetitions ?? 0,
+                }).ToList()
+            }).ToList();
+
             return verses;
         }
 

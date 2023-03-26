@@ -9,14 +9,13 @@
 // ReSharper disable InconsistentNaming
 
 import { mergeMap as _observableMergeMap, catchError as _observableCatch } from 'rxjs/operators';
-import { Observable, throwError as _observableThrow, of as _observableOf } from 'rxjs';
+import { Observable, throwError as _observableThrow, of as _observableOf, of } from 'rxjs';
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angular/common/http';
 
 import * as moment from 'moment';
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
-export const API_CURRENT_USER_ID = new InjectionToken<string>('API_CURRENT_USER_ID');
 
 @Injectable()
 export class Service {
@@ -45,7 +44,6 @@ export class Service {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
             })
         };
 
@@ -93,8 +91,7 @@ export class Service {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "text/plain",
-                "Access-Control-Allow-Origin": "*",
+                "Accept": "text/plain"
             })
         };
 
@@ -138,7 +135,7 @@ export class Service {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Song[]>([]);
+        return _observableOf([]);
     }
 
     /**
@@ -160,8 +157,7 @@ export class Service {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "text/plain",
-                'Access-Control-Allow-Origin': "*",
+                "Accept": "text/plain"
             })
         };
 
@@ -360,7 +356,7 @@ export class Service {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<User[]>([]);
+        return _observableOf([]);
     }
 
     /**
@@ -485,6 +481,162 @@ export class SongbookService {
      * @param body (optional) 
      * @return Success
      */
+    append(body: AppendToSongbookCommand | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/songbook/append";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAppend(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAppend(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processAppend(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    remove(body: RemoveFromSongbookCommand | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/songbook/remove";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processRemove(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processRemove(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processRemove(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    reorder(body: ReorderCommand | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/songbook/reorder";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processReorder(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processReorder(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processReorder(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
     generate(body: GenerateSongbookCommand | undefined): Observable<void> {
         let url_ = this.baseUrl + "/songbook/generate";
         url_ = url_.replace(/[?&]$/, "");
@@ -534,12 +686,13 @@ export class SongbookService {
     }
 }
 
-export class Arrangement implements IArrangement {
-    _id!: string | undefined;
-    type!: ArrangementType;
-    verse!: VerseArrangement[] | undefined;
+export class AppendToSongbookCommand implements IAppendToSongbookCommand {
+    songbookId!: string | undefined;
+    songId!: string | undefined;
+    userId!: string | undefined;
+    order!: number;
 
-    constructor(data?: IArrangement) {
+    constructor(data?: IAppendToSongbookCommand) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -550,60 +703,49 @@ export class Arrangement implements IArrangement {
 
     init(_data?: any) {
         if (_data) {
-            this._id = _data["_id"];
-            this.type = _data["type"];
-            if (Array.isArray(_data["verse"])) {
-                this.verse = [] as any;
-                for (let item of _data["verse"])
-                    this.verse!.push(VerseArrangement.fromJS(item));
-            }
+            this.songbookId = _data["songbookId"];
+            this.songId = _data["songId"];
+            this.userId = _data["userId"];
+            this.order = _data["order"];
         }
     }
 
-    static fromJS(data: any): Arrangement {
+    static fromJS(data: any): AppendToSongbookCommand {
         data = typeof data === 'object' ? data : {};
-        let result = new Arrangement();
+        let result = new AppendToSongbookCommand();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["_id"] = this._id;
-        data["type"] = this.type;
-        if (Array.isArray(this.verse)) {
-            data["verse"] = [];
-            for (let item of this.verse)
-                data["verse"].push(item.toJSON());
-        }
+        data["songbookId"] = this.songbookId;
+        data["songId"] = this.songId;
+        data["userId"] = this.userId;
+        data["order"] = this.order;
         return data;
     }
 
-    clone(): Arrangement {
+    clone(): AppendToSongbookCommand {
         const json = this.toJSON();
-        let result = new Arrangement();
+        let result = new AppendToSongbookCommand();
         result.init(json);
         return result;
     }
 }
 
-export interface IArrangement {
-    _id: string | undefined;
-    type: ArrangementType;
-    verse: VerseArrangement[] | undefined;
+export interface IAppendToSongbookCommand {
+    songbookId: string | undefined;
+    songId: string | undefined;
+    userId: string | undefined;
+    order: number;
 }
 
-export enum ArrangementType {
-    _0 = 0,
-    _1 = 1,
-    _2 = 2,
-}
+export class ArrangementEntry implements IArrangementEntry {
+    startIndex!: number;
+    note!: string | undefined;
 
-export class CreateArrangementDto implements ICreateArrangementDto {
-    type!: ArrangementType;
-    verse!: CreateVerseArrangementDto[] | undefined;
-
-    constructor(data?: ICreateArrangementDto) {
+    constructor(data?: IArrangementEntry) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -614,44 +756,36 @@ export class CreateArrangementDto implements ICreateArrangementDto {
 
     init(_data?: any) {
         if (_data) {
-            this.type = _data["type"];
-            if (Array.isArray(_data["verse"])) {
-                this.verse = [] as any;
-                for (let item of _data["verse"])
-                    this.verse!.push(CreateVerseArrangementDto.fromJS(item));
-            }
+            this.startIndex = _data["startIndex"];
+            this.note = _data["note"];
         }
     }
 
-    static fromJS(data: any): CreateArrangementDto {
+    static fromJS(data: any): ArrangementEntry {
         data = typeof data === 'object' ? data : {};
-        let result = new CreateArrangementDto();
+        let result = new ArrangementEntry();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        if (Array.isArray(this.verse)) {
-            data["verse"] = [];
-            for (let item of this.verse)
-                data["verse"].push(item.toJSON());
-        }
+        data["startIndex"] = this.startIndex;
+        data["note"] = this.note;
         return data;
     }
 
-    clone(): CreateArrangementDto {
+    clone(): ArrangementEntry {
         const json = this.toJSON();
-        let result = new CreateArrangementDto();
+        let result = new ArrangementEntry();
         result.init(json);
         return result;
     }
 }
 
-export interface ICreateArrangementDto {
-    type: ArrangementType;
-    verse: CreateVerseArrangementDto[] | undefined;
+export interface IArrangementEntry {
+    startIndex: number;
+    note: string | undefined;
 }
 
 export class CreateLineDto implements ICreateLineDto {
@@ -772,7 +906,6 @@ export class CreateSongDto implements ICreateSongDto {
     title!: string | undefined;
     suggestedBmp!: number;
     verses!: CreateVerseDto[] | undefined;
-    arrangements!: CreateArrangementDto[] | undefined;
 
     constructor(data?: ICreateSongDto) {
         if (data) {
@@ -791,11 +924,6 @@ export class CreateSongDto implements ICreateSongDto {
                 this.verses = [] as any;
                 for (let item of _data["verses"])
                     this.verses!.push(CreateVerseDto.fromJS(item));
-            }
-            if (Array.isArray(_data["arrangements"])) {
-                this.arrangements = [] as any;
-                for (let item of _data["arrangements"])
-                    this.arrangements!.push(CreateArrangementDto.fromJS(item));
             }
         }
     }
@@ -816,11 +944,6 @@ export class CreateSongDto implements ICreateSongDto {
             for (let item of this.verses)
                 data["verses"].push(item.toJSON());
         }
-        if (Array.isArray(this.arrangements)) {
-            data["arrangements"] = [];
-            for (let item of this.arrangements)
-                data["arrangements"].push(item.toJSON());
-        }
         return data;
     }
 
@@ -836,7 +959,6 @@ export interface ICreateSongDto {
     title: string | undefined;
     suggestedBmp: number;
     verses: CreateVerseDto[] | undefined;
-    arrangements: CreateArrangementDto[] | undefined;
 }
 
 export class CreateUserDto implements ICreateUserDto {
@@ -896,61 +1018,6 @@ export interface ICreateUserDto {
     password: string | undefined;
     isActive: boolean;
     role: UserRole;
-}
-
-export class CreateVerseArrangementDto implements ICreateVerseArrangementDto {
-    verseIndex!: number;
-    entries!: VerseArrangementEntry[] | undefined;
-
-    constructor(data?: ICreateVerseArrangementDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.verseIndex = _data["verseIndex"];
-            if (Array.isArray(_data["entries"])) {
-                this.entries = [] as any;
-                for (let item of _data["entries"])
-                    this.entries!.push(VerseArrangementEntry.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateVerseArrangementDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateVerseArrangementDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["verseIndex"] = this.verseIndex;
-        if (Array.isArray(this.entries)) {
-            data["entries"] = [];
-            for (let item of this.entries)
-                data["entries"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateVerseArrangementDto {
-        const json = this.toJSON();
-        let result = new CreateVerseArrangementDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateVerseArrangementDto {
-    verseIndex: number;
-    entries: VerseArrangementEntry[] | undefined;
 }
 
 export class CreateVerseDto implements ICreateVerseDto {
@@ -1058,8 +1125,9 @@ export interface IGenerateSongbookCommand {
 export class Line implements ILine {
     _id!: string | undefined;
     text!: string | undefined;
-    repetitions!: number;
-    repetitionsInVerse!: number;
+    repetitions!: number | undefined;
+    repetitionsInVerse!: number | undefined;
+    guitarArrangement!: ArrangementEntry[] | undefined;
 
     constructor(data?: ILine) {
         if (data) {
@@ -1076,6 +1144,11 @@ export class Line implements ILine {
             this.text = _data["text"];
             this.repetitions = _data["repetitions"];
             this.repetitionsInVerse = _data["repetitionsInVerse"];
+            if (Array.isArray(_data["guitarArrangement"])) {
+                this.guitarArrangement = [] as any;
+                for (let item of _data["guitarArrangement"])
+                    this.guitarArrangement!.push(ArrangementEntry.fromJS(item));
+            }
         }
     }
 
@@ -1092,6 +1165,11 @@ export class Line implements ILine {
         data["text"] = this.text;
         data["repetitions"] = this.repetitions;
         data["repetitionsInVerse"] = this.repetitionsInVerse;
+        if (Array.isArray(this.guitarArrangement)) {
+            data["guitarArrangement"] = [];
+            for (let item of this.guitarArrangement)
+                data["guitarArrangement"].push(item.toJSON());
+        }
         return data;
     }
 
@@ -1106,8 +1184,9 @@ export class Line implements ILine {
 export interface ILine {
     _id: string | undefined;
     text: string | undefined;
-    repetitions: number;
-    repetitionsInVerse: number;
+    repetitions: number | undefined;
+    repetitionsInVerse: number | undefined;
+    guitarArrangement: ArrangementEntry[] | undefined;
 }
 
 export class ModificationHistoryEntry implements IModificationHistoryEntry {
@@ -1165,15 +1244,121 @@ export interface IModificationHistoryEntry {
     createdOn: moment.Moment;
 }
 
+export class RemoveFromSongbookCommand implements IRemoveFromSongbookCommand {
+    songbookId!: string | undefined;
+    songId!: string | undefined;
+    userId!: string | undefined;
+
+    constructor(data?: IRemoveFromSongbookCommand) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.songbookId = _data["songbookId"];
+            this.songId = _data["songId"];
+            this.userId = _data["userId"];
+        }
+    }
+
+    static fromJS(data: any): RemoveFromSongbookCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new RemoveFromSongbookCommand();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["songbookId"] = this.songbookId;
+        data["songId"] = this.songId;
+        data["userId"] = this.userId;
+        return data;
+    }
+
+    clone(): RemoveFromSongbookCommand {
+        const json = this.toJSON();
+        let result = new RemoveFromSongbookCommand();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IRemoveFromSongbookCommand {
+    songbookId: string | undefined;
+    songId: string | undefined;
+    userId: string | undefined;
+}
+
+export class ReorderCommand implements IReorderCommand {
+    songbookId!: string | undefined;
+    songId!: string | undefined;
+    userId!: string | undefined;
+    newOrder!: number;
+
+    constructor(data?: IReorderCommand) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.songbookId = _data["songbookId"];
+            this.songId = _data["songId"];
+            this.userId = _data["userId"];
+            this.newOrder = _data["newOrder"];
+        }
+    }
+
+    static fromJS(data: any): ReorderCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new ReorderCommand();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["songbookId"] = this.songbookId;
+        data["songId"] = this.songId;
+        data["userId"] = this.userId;
+        data["newOrder"] = this.newOrder;
+        return data;
+    }
+
+    clone(): ReorderCommand {
+        const json = this.toJSON();
+        let result = new ReorderCommand();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IReorderCommand {
+    songbookId: string | undefined;
+    songId: string | undefined;
+    userId: string | undefined;
+    newOrder: number;
+}
+
 export class Song implements ISong {
-    _id: string;
-    title: string;
-    author: string;
-    authorId: string;
-    modificationHistory: ModificationHistoryEntry[];
-    suggestedBmp: number;
-    verses: Verse[];
-    arrangements: Arrangement[];
+    _id!: string | undefined;
+    title!: string | undefined;
+    author!: string | undefined;
+    authorId!: string | undefined;
+    modificationHistory!: ModificationHistoryEntry[] | undefined;
+    suggestedBmp!: number;
+    verses!: Verse[] | undefined;
+    arrangements!: string[] | undefined;
 
     constructor(data?: ISong) {
         if (data) {
@@ -1204,7 +1389,7 @@ export class Song implements ISong {
             if (Array.isArray(_data["arrangements"])) {
                 this.arrangements = [] as any;
                 for (let item of _data["arrangements"])
-                    this.arrangements!.push(Arrangement.fromJS(item));
+                    this.arrangements!.push(item);
             }
         }
     }
@@ -1236,7 +1421,7 @@ export class Song implements ISong {
         if (Array.isArray(this.arrangements)) {
             data["arrangements"] = [];
             for (let item of this.arrangements)
-                data["arrangements"].push(item.toJSON());
+                data["arrangements"].push(item);
         }
         return data;
     }
@@ -1257,15 +1442,17 @@ export interface ISong {
     modificationHistory: ModificationHistoryEntry[] | undefined;
     suggestedBmp: number;
     verses: Verse[] | undefined;
-    arrangements: Arrangement[] | undefined;
+    arrangements: string[] | undefined;
 }
 
 export class Songbook implements ISongbook {
     _id!: string | undefined;
     title!: string | undefined;
+    authorId!: string | undefined;
     layout!: SongbookLayout;
     entries!: SongbookEntry[] | undefined;
     docxFilesUrls!: string[] | undefined;
+    shareUrl!: string | undefined;
 
     constructor(data?: ISongbook) {
         if (data) {
@@ -1280,6 +1467,7 @@ export class Songbook implements ISongbook {
         if (_data) {
             this._id = _data["_id"];
             this.title = _data["title"];
+            this.authorId = _data["authorId"];
             this.layout = _data["layout"];
             if (Array.isArray(_data["entries"])) {
                 this.entries = [] as any;
@@ -1291,6 +1479,7 @@ export class Songbook implements ISongbook {
                 for (let item of _data["docxFilesUrls"])
                     this.docxFilesUrls!.push(item);
             }
+            this.shareUrl = _data["shareUrl"];
         }
     }
 
@@ -1305,6 +1494,7 @@ export class Songbook implements ISongbook {
         data = typeof data === 'object' ? data : {};
         data["_id"] = this._id;
         data["title"] = this.title;
+        data["authorId"] = this.authorId;
         data["layout"] = this.layout;
         if (Array.isArray(this.entries)) {
             data["entries"] = [];
@@ -1316,6 +1506,7 @@ export class Songbook implements ISongbook {
             for (let item of this.docxFilesUrls)
                 data["docxFilesUrls"].push(item);
         }
+        data["shareUrl"] = this.shareUrl;
         return data;
     }
 
@@ -1330,9 +1521,11 @@ export class Songbook implements ISongbook {
 export interface ISongbook {
     _id: string | undefined;
     title: string | undefined;
+    authorId: string | undefined;
     layout: SongbookLayout;
     entries: SongbookEntry[] | undefined;
     docxFilesUrls: string[] | undefined;
+    shareUrl: string | undefined;
 }
 
 export class SongbookEntry implements ISongbookEntry {
@@ -1546,7 +1739,7 @@ export enum UserRole {
 export class Verse implements IVerse {
     _id!: string | undefined;
     lines!: Line[] | undefined;
-    repetitions!: number;
+    repetitions!: number | undefined;
 
     constructor(data?: IVerse) {
         if (data) {
@@ -1599,116 +1792,11 @@ export class Verse implements IVerse {
 export interface IVerse {
     _id: string | undefined;
     lines: Line[] | undefined;
-    repetitions: number;
-}
-
-export class VerseArrangement implements IVerseArrangement {
-    _id!: string | undefined;
-    verseIndex!: number;
-    entries!: VerseArrangementEntry[] | undefined;
-
-    constructor(data?: IVerseArrangement) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this._id = _data["_id"];
-            this.verseIndex = _data["verseIndex"];
-            if (Array.isArray(_data["entries"])) {
-                this.entries = [] as any;
-                for (let item of _data["entries"])
-                    this.entries!.push(VerseArrangementEntry.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): VerseArrangement {
-        data = typeof data === 'object' ? data : {};
-        let result = new VerseArrangement();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["_id"] = this._id;
-        data["verseIndex"] = this.verseIndex;
-        if (Array.isArray(this.entries)) {
-            data["entries"] = [];
-            for (let item of this.entries)
-                data["entries"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): VerseArrangement {
-        const json = this.toJSON();
-        let result = new VerseArrangement();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IVerseArrangement {
-    _id: string | undefined;
-    verseIndex: number;
-    entries: VerseArrangementEntry[] | undefined;
-}
-
-export class VerseArrangementEntry implements IVerseArrangementEntry {
-    startIndex!: number;
-    note!: string | undefined;
-
-    constructor(data?: IVerseArrangementEntry) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.startIndex = _data["startIndex"];
-            this.note = _data["note"];
-        }
-    }
-
-    static fromJS(data: any): VerseArrangementEntry {
-        data = typeof data === 'object' ? data : {};
-        let result = new VerseArrangementEntry();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["startIndex"] = this.startIndex;
-        data["note"] = this.note;
-        return data;
-    }
-
-    clone(): VerseArrangementEntry {
-        const json = this.toJSON();
-        let result = new VerseArrangementEntry();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IVerseArrangementEntry {
-    startIndex: number;
-    note: string | undefined;
+    repetitions: number | undefined;
 }
 
 export class ApiException extends Error {
+    // message: string;
     status: number;
     response: string;
     headers: { [key: string]: any; };

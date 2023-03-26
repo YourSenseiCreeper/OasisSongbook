@@ -6,12 +6,10 @@ namespace OasisSongbook.Business.Model.Songbook
     {
         public string _id { get; set; }
         public string Title { get; set; }
-        // CreatedOn?
-        // ModifiedOn?
+        public string AuthorId { get; set; }
         public SongbookLayout Layout { get; set; }
         public List<SongbookEntry> Entries { get; set; }
         public List<string> DocxFilesUrls { get; set; }
-        // autor?
-        // share link?
+        public string ShareUrl { get; set; }
     }
 }

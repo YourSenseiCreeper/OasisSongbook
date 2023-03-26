@@ -1,0 +1,227 @@
+[
+    {
+        "_id": "64208269675046ae30113fdb",
+        "Title": "Duchu Święty przyjdź",
+        "Author": "admin",
+        "AuthorId": "64208269675046ae30113fda",
+        "ModificationHistory": [],
+        "SuggestedBpm": 120,
+        "Arrangements": [
+            "Guitar"
+        ],
+        "Verses": [
+            {
+                "Repetitions": null,
+                "Lines": [
+                    {
+                        "Text": "Duchu Święty przyjdź",
+                        "Repetitions": 4,
+                        "GuitarArrangement": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "A"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "G"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "A"
+                            }
+                        ]
+                    },
+                    {
+                        "Text": "Niech wiara zagości",
+                        "GuitarArrangement": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "G"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            }
+                        ]
+                    },
+                    {
+                        "Text": "Nadzieja zagości",
+                        "GuitarArrangement": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "G"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            }
+                        ]
+                    },
+                    {
+                        "Text": "Niech miłość zagości w nas",
+                        "Repetitions": 2,
+                        "GuitarArrangement": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "G"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "A"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id": "64208269675046ae30113fdc",
+        "Title": "Duchu Święty wołam przyjdź",
+        "Author": "admin",
+        "AuthorId": "64208269675046ae30113fda",
+        "ModificationHistory": [],
+        "SuggestedBpm": 120,
+        "Verses": [
+            {
+                "Repetitions": null,
+                "Lines": [
+                    {
+                        "Text": "Duchu Święty wołam przyjdź",
+                        "Repetitions": 2,
+                        "GuitarArrangement": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            }
+                        ]
+                    },
+                    {
+                        "Text": "Bądź jak ogień w duszy mej",
+                        "GuitarArrangement": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "a"
+                            }
+                        ]
+                    },
+                    {
+                        "Text": "Bądź jak ogień w ciele mym",
+                        "GuitarArrangement": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "G"
+                            }
+                        ]
+                    },
+                    {
+                        "Text": "Rozpal mnie.",
+                        "GuitarArrangement": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "G"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "Repetitions": null,
+                "Lines": [
+                    {
+                        "Text": "Wszechmogący Bóg jest pośród nas",
+                        "GuitarArrangement": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "a7"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "G"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            }
+                        ]
+                    },
+                    {
+                        "Text": "Miłosierdzie Jego wielkie jest.",
+                        "GuitarArrangement": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "a7"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "G"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            }
+                        ]
+                    },
+                    {
+                        "Text": "Okazuje dobroć swoją dziś",
+                        "GuitarArrangement": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "a7"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "G"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            }
+                        ]
+                    },
+                    {
+                        "Text": "Dla tych, którzy chcą miłować Go.",
+                        "GuitarArrangement": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "a7"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "G"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

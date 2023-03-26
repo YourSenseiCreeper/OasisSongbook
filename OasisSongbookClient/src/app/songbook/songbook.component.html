@@ -35,7 +35,11 @@
                 <span>{{ getArrangementForLine(item, lineIndex) }}</span>
               </div> -->
               <div class="text">
-                <span>{{ line.text }} <i *ngIf="line.repetitions > 1">/x{{ line.repetitions }}</i></span>
+                <span>
+                  {{ line.text }}
+                  <b>{{ getArrangement(line.guitarArrangement!) }}</b>
+                  <i *ngIf="!!line.repetitions">/x{{ line.repetitions }}</i>
+                </span>
               </div>
             </div>
           </div>

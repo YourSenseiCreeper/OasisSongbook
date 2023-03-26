@@ -1,0 +1,305 @@
+[
+    {
+        "_id": "64208269675046ae30113fdb",
+        "Title": "Duchu Święty przyjdź",
+        "Author": "admin",
+        "AuthorId": "64208269675046ae30113fda",
+        "ModificationHistory": [],
+        "SuggestedBpm": 120,
+        "Verses": [
+            {
+                "Repetitions": null,
+                "Lines": [
+                    {
+                        "Text": "Duchu Święty przyjdź",
+                        "Repetitions": 4,
+                        "RepetitionsInVerse": null
+                    },
+                    {
+                        "Text": "Niech wiara zagości",
+                        "Repetitions": null,
+                        "RepetitionsInVerse": null
+                    },
+                    {
+                        "Text": "Nadzieja zagości",
+                        "Repetitions": null,
+                        "RepetitionsInVerse": null
+                    },
+                    {
+                        "Text": "Niech miłość zagości w nas",
+                        "Repetitions": 2,
+                        "RepetitionsInVerse": null
+                    }
+                ]
+            }
+        ],
+        "Arrangements": [
+            {
+                "Type": 0,
+                "Verse": [
+                    {
+                        "VerseIndex": 0,
+                        "Entries": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "A"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "G"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "A"
+                            }
+                        ]
+                    },
+                    {
+                        "VerseIndex": 1,
+                        "Entries": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "G"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            }
+                        ]
+                    },
+                    {
+                        "VerseIndex": 2,
+                        "Entries": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "G"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            }
+                        ]
+                    },
+                    {
+                        "VerseIndex": 3,
+                        "Entries": [
+                            {
+                                "StartIndex": 10,
+                                "Note": "G"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "D"
+                            },
+                            {
+                                "StartIndex": 10,
+                                "Note": "A"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id": "64208269675046ae30113fdc",
+        "Title": "Duchu Święty wołam przyjdź",
+        "Author": "admin",
+        "AuthorId": "64208269675046ae30113fda",
+        "ModificationHistory": [],
+        "SuggestedBpm": 120,
+        "Verses": [
+            {
+                "Repetitions": null,
+                "Lines": [
+                    {
+                        "Text": "Duchu Święty wołam przyjdź",
+                        "Repetitions": 2,
+                        "RepetitionsInVerse": null
+                    },
+                    {
+                        "Text": "Bądź jak ogień w duszy mej",
+                        "Repetitions": null,
+                        "RepetitionsInVerse": null
+                    },
+                    {
+                        "Text": "Bądź jak ogień w ciele mym",
+                        "Repetitions": null,
+                        "RepetitionsInVerse": null
+                    },
+                    {
+                        "Text": "Rozpal mnie.",
+                        "Repetitions": null,
+                        "RepetitionsInVerse": null
+                    }
+                ]
+            },
+            {
+                "Repetitions": null,
+                "Lines": [
+                    {
+                        "Text": "Wszechmogący Bóg jest pośród nas",
+                        "Repetitions": null,
+                        "RepetitionsInVerse": null
+                    },
+                    {
+                        "Text": "Miłosierdzie Jego wielkie jest.",
+                        "Repetitions": null,
+                        "RepetitionsInVerse": null
+                    },
+                    {
+                        "Text": "Okazuje dobroć swoją dziś",
+                        "Repetitions": null,
+                        "RepetitionsInVerse": null
+                    },
+                    {
+                        "Text": "Dla tych, którzy chcą miłować Go.",
+                        "Repetitions": null,
+                        "RepetitionsInVerse": null
+                    }
+                ]
+            }
+        ],
+        "Arrangements": [
+            {
+                "Type": 0,
+                "Verses": [
+                    {
+                        "VerseIndex": 0,
+                        "Lines": [
+                            {
+                                "LineIndex": 0,
+                                "Entries": [
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "D"
+                                    }
+                                ]
+                            },
+                            {
+                                "LineIndex": 1,
+                                "Entries": [
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "a"
+                                    }
+                                ]
+                            },
+                            {
+                                "LineIndex": 2,
+                                "Entries": [
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "G"
+                                    }
+                                ]
+                            },
+                            {
+                                "LineIndex": 3,
+                                "Entries": [
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "D"
+                                    },
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "G"
+                                    },
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "D"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "VerseIndex": 1,
+                        "Lines": [
+                            {
+                                "LineIndex": 0,
+                                "Entries": [
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "a7"
+                                    },
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "G"
+                                    },
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "D"
+                                    }
+                                ]
+                            },
+                            {
+                                "LineIndex": 1,
+                                "Entries": [
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "a7"
+                                    },
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "G"
+                                    },
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "D"
+                                    }
+                                ]
+                            },
+                            {
+                                "LineIndex": 2,
+                                "Entries": [
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "a7"
+                                    },
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "G"
+                                    },
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "D"
+                                    }
+                                ]
+                            },
+                            {
+                                "LineIndex": 3,
+                                "Entries": [
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "a7"
+                                    },
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "G"
+                                    },
+                                    {
+                                        "StartIndex": 10,
+                                        "Note": "D"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
