@@ -38,12 +38,12 @@ namespace OasisSongbook.Seeder
 
             var jsonUsers = File.ReadAllText("Data/users.json");
             var users = JsonConvert.DeserializeObject<IEnumerable<User>>(jsonUsers);
-            //await context.Users.AddRange(users);
+            await context.Users.AddRange(users);
             Console.WriteLine($"Created {users.Count()} users");
 
             var jsonSongs = File.ReadAllText("Data/songs_new.json");
             var songs = JsonConvert.DeserializeObject<IEnumerable<Song>>(jsonSongs);
-            //await context.Songs.AddRange(songs);
+            await context.Songs.AddRange(songs);
             Console.WriteLine($"Created {songs.Count()} songs");
 
             var jsonSongbooks = File.ReadAllText("Data/songbooks.json");
