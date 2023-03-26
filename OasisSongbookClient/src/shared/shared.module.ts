@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { environment } from 'src/environment/environment';
-import { API_BASE_URL, Service, SongbookService } from './api-client';
+import { API_BASE_URL, API_CURRENT_USER_ID, Service, SongbookService } from './api-client';
 
 @NgModule({
   declarations: [],
@@ -14,6 +14,7 @@ import { API_BASE_URL, Service, SongbookService } from './api-client';
     Service,
     SongbookService,
     { provide: API_BASE_URL, useFactory: () => environment.baseApiUrl },
+    { provide: API_CURRENT_USER_ID, useFactory: () => environment.currentUserId },
   ],
   bootstrap: [],
   exports: []

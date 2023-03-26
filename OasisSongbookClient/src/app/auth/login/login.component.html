@@ -1,0 +1,58 @@
+<h2>
+  Logowanie
+</h2>
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <mat-form-field appearance="fill">
+    <mat-icon class="icon" matPrefix>
+      email
+    </mat-icon>
+    <mat-label>
+      Email
+    </mat-label>
+    <input autofocus matInput type="email" formControlName="login" required>
+    <mat-error *ngIf="loginForm.controls['login'].invalid">
+      {{ getErrorMessage('login') }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-icon class="icon" matPrefix>
+      password
+    </mat-icon>
+    <mat-label>
+      Hasło
+    </mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+    <mat-error *ngIf="loginForm.controls['password'].invalid">
+      {{ getErrorMessage('password') }}
+    </mat-error>
+    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ukryj hasło'"
+      [attr.aria-pressed]="hide">
+      <mat-icon>
+        {{hide ? 'visibility_off' : 'visibility'}}
+      </mat-icon>
+    </button>
+  </mat-form-field>
+  <p>
+    <a routerLink="/">
+      Zapomniałeś hasła?
+    </a>
+  </p>
+  <button type="submit" class="submit" mat-stroked-button color="primary"
+    [disabled]="!loginForm.valid || submitDisabled">
+    <div *ngIf="!submitDisabled" class="submit-text">
+      <mat-icon class="icon">
+        login
+      </mat-icon>
+      Zaloguj się
+    </div>
+    <div *ngIf="submitDisabled" class="spinner">
+      <mat-spinner [diameter]="22"></mat-spinner>
+    </div>
+  </button>
+  <h4>
+    Nie posiadasz konta?
+    <a routerLink="/auth/register">
+      Stwórz konto
+    </a>
+  </h4>
+</form>

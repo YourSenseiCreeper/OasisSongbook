@@ -1,0 +1,33 @@
+.container {
+    margin: 15px auto;
+    width: 80%;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+}
+
+.search {
+    width: 100%;
+    border-bottom: 2px solid gray;
+    font-size: 2em;
+}
+
+.results-container {
+    border: 2px solid black;
+}
+
+.song-box {
+    background-color: bisque;
+    transition: background-color 0.2s linear;
+}
+
+.song-box:hover {
+    background-color: rgb(194, 173, 148);
+}
+
+@media screen and (max-width: 800px) {
+    .container {
+        margin: 0 auto;
+        width: 100%;
+    }
+}

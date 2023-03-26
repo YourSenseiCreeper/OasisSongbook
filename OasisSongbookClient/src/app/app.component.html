@@ -1,2 +1,24 @@
-<h1>AppComponent</h1>
+<mat-toolbar color="primary" class="main-toolbar">
+    <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button> -->
+    <span routerLink="/" style="cursor: pointer">Kreator śpiewnika</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button routerLink="/song">
+        <mat-icon>queue_music</mat-icon>
+        Piosenki
+    </button>
+    <button mat-raised-button routerLink="/songbook">
+        <mat-icon>book</mat-icon>
+        Śpiewnik
+    </button>
+    <button mat-raised-button routerLink="/auth/login">
+        <mat-icon>book</mat-icon>
+        Logowanie
+    </button>
+    <button mat-raised-button routerLink="/user">
+        <mat-icon>person</mat-icon>
+        Profil
+    </button>
+</mat-toolbar>
 <router-outlet></router-outlet>

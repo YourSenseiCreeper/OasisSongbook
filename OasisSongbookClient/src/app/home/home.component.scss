@@ -1,3 +1,77 @@
+@import 'variables.scss';
+
 h1 {
-    background-color: aqua;
+    font-size: 5em;
+    font-weight: 800;
+    margin-bottom: .1em;
+    margin-top: .5em;
+    transition: color .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+h3 {
+    font-size: 1em;
+    font-weight: 600;
+    color: $my-primary;
+    margin-top: 0em;
+    margin-bottom: .5em;
+}
+
+h1:hover {
+    color: $my-primary;
+    transition: color .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+
+    .welcome {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .description {
+        margin: 0 auto;
+        border: 2px solid gray;
+        border-radius: 1em;
+        padding: 1em;
+        width: 60%;
+
+        .section {
+            margin-bottom: 1.5em;
+        }
+
+        p {
+            margin: 0;
+            font-weight: normal;
+            text-align: justify;
+            line-height: 1.5em;
+        }
+
+        ul {
+            margin-top: .25em;
+            margin-bottom: 0em;
+
+            li {
+                line-height: 1.5em;
+            }
+        }
+    }
+}
+
+.author {
+    float: right;
+    font-size: .75em;
+}
+
+@media screen and (max-width: 800px) {
+    .home-container {
+        .description {
+            width: 90%;
+            margin-bottom: 100px;
+        }
+    }
 }

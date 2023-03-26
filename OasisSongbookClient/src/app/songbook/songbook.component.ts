@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Dialog } from '@angular/cdk/dialog';
-import { Song } from 'src/shared/api-client';
+import { Song, SongbookService } from 'src/shared/api-client';
 import { EditSongStyleDialogComponent } from '../songs-collection/edit-song-style-dialog/edit-song-style-dialog.component';
 
 @Component({
@@ -13,7 +13,7 @@ export class SongbookComponent {
   showFiller = false;
   selectedSongs: Song[] = [];
 
-  constructor(public dialog: Dialog) { }
+  constructor(public dialog: Dialog, private service: SongbookService) { }
 
   drop(event: CdkDragDrop<Song[]>) {
     if (event.previousContainer === event.container) {
@@ -26,6 +26,8 @@ export class SongbookComponent {
         event.currentIndex,
       );
     }
+
+    // this.service.generate()
   }
 
   // getArrangementForLine(song: Song, verseIndex: number, lineIndex: number): string {

@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { SongAllListComponent } from './all-list/song-all-list.component';
 import { SongComponent } from './song.component';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: SongComponent,
-    pathMatch: 'full'
-  },
-];
-
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild([
+    {
+      path: '',
+      component: SongAllListComponent,
+      pathMatch: 'full'
+    },
+  ])],
   exports: [RouterModule]
 })
 export class SongRoutingModule { }

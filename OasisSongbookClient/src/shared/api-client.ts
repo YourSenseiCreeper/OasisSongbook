@@ -16,6 +16,7 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angula
 import * as moment from 'moment';
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
+export const API_CURRENT_USER_ID = new InjectionToken<string>('API_CURRENT_USER_ID');
 
 @Injectable()
 export class Service {

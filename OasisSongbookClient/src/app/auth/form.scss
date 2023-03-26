@@ -1,0 +1,74 @@
+@import 'variables.scss';
+
+h2 {
+  color: $my-primary;
+}
+
+form {
+  .mat-form-field {
+    width: 100%;
+
+    .icon {
+      color: $my-primary;
+      margin-right: 0.25rem;
+    }
+  }
+
+  p {
+    font-size: 0.9em;
+    margin: 1px 0 0 0;
+  }
+
+  a {
+    color: $my-primary;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .submit {
+    width: 100%;
+    border-radius: 25px;
+    border-color: $my-primary;
+    margin: 1.5rem 0 1.5rem 0;
+
+    .submit-text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .icon {
+        margin-right: 0.5rem;
+      }
+    }
+
+    .spinner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 34px;
+    }
+
+    &:disabled {
+      border-color: inherit;
+    }
+  }
+
+  h4 {
+    text-align: center;
+    margin: 0;
+    font-weight: 300;
+  }
+}
+
+::ng-deep {
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: white;
+  }
+
+  .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: rgba(0, 0, 0, 0.6);
+  }
+}

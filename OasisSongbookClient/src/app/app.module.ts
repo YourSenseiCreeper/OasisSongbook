@@ -16,7 +16,7 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton, MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -66,15 +66,18 @@ import { HomeModule } from './home/home.module';
     AppRoutingModule,
     HomeModule,
     BrowserAnimationsModule,
-    MatSidenavModule,
-    MatButtonModule,
-    DragDropModule,
-    MatFormFieldModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
+    MatToolbarModule,
     MatIconModule,
-    MatDialogModule,
+    MatButtonModule,
+    // MatSidenavModule,
+    // MatButtonModule,
+    // DragDropModule,
+    // MatFormFieldModule,
+    // FormsModule,
+    // ReactiveFormsModule,
+    // MatInputModule,
+    // MatIconModule,
+    // MatDialogModule,
     RouterModule,
   ],
   providers: [],

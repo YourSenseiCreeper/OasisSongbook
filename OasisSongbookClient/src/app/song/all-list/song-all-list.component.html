@@ -1,0 +1,8 @@
+<div class="container">
+    <input class="search" name="search" placeholder="Wpisz fragment tytułu lub tekstu">
+    <div class="results-container">
+        <div class="song-box" *ngFor="let song of displayedSongs$ | async">
+            {{ song.title }}
+        </div>
+    </div>
+</div>

@@ -10,17 +10,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/shared/shared.module';
+import { SongAllListComponent } from './all-list/song-all-list.component';
 import { SongRoutingModule } from './song-routing.module';
 import { SongComponent } from './song.component';
 
 @NgModule({
   declarations: [
-    SongComponent
+    SongComponent,
+    SongAllListComponent
   ],
   imports: [
     CommonModule,
-    RouterModule,
-    // SharedModule,
+    // RouterModule,
+    SharedModule,
     SongRoutingModule,
     MatSidenavModule,
     MatButtonModule,

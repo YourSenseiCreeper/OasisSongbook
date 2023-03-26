@@ -1,0 +1,2 @@
+cd OasisSongbookClient
+npm start

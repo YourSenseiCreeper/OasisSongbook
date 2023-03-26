@@ -1,4 +1,6 @@
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using OasisSongbook.Business.Context;
 using OasisSongbook.Business.Mappers;
@@ -19,6 +21,7 @@ namespace OasisSongbookBackend.WebApi.Controllers
         private readonly ILogger<SongbookController> _logger;
         private readonly OasisSongbookNoSqlContext _context;
         private readonly IDocxTemplateService _docxTemplateService;
+
         public SongbookController(ILogger<SongbookController> logger, 
             OasisSongbookNoSqlContext context,
             IDocxTemplateService docxTemplateService)
@@ -26,6 +29,62 @@ namespace OasisSongbookBackend.WebApi.Controllers
             _logger = logger;
             _context = context;
             _docxTemplateService = docxTemplateService;
+        }
+
+        [HttpPost("append")]
+        public async Task<ActionResult> AppendToSongbook([FromBody] AppendToSongbookCommand command)
+        {
+            //current user
+            var user = await _context.Users.Get(command.UserId);
+            if (user == null)
+                return new BadRequestObjectResult($"Not found user with id: '{command.UserId}'");
+
+            var song = await _context.Song.Get(command.SongId);
+            if (song == null)
+                return new BadRequestObjectResult($"Not found song with id: '{command.SongId}'");
+
+            var songbook = user.Songbooks.FirstOrDefault(s => s._id == command.SongbookId);
+            if (songbook == null)
+                return new BadRequestObjectResult($"Not found songbook with id: '{command.SongbookId}'");
+
+            var newEntry = new SongbookEntry
+            {
+                _id = ObjectId.GenerateNewId().ToString(),
+                SongId = command.SongId,
+            };
+
+            var filter = Builders<User>.Filter.Eq(u => u._id, command.UserId);
+            var update = Builders<User>.Update.Set<List<Songbook>>(f => f.Songbooks, songbook).Set<SongbookEntry>();
+            _context.Users.update(
+                    {
+                                "_id": 5
+                    },
+                    {
+                        $set: { 'Vehicles.$[v].Parts.$[p].Name': 'Tyre' }
+                            },
+                    {
+                            arrayFilters:
+                                [
+                                { 'v._id': { $eq: 17 } },
+                            { 'p._id': { $eq: 34 } }
+                        ]
+                    }
+                )
+            await _context.Users.Update(filter, update);
+
+            return new OkResult();
+        }
+
+        [HttpPost("remove")]
+        public async Task<ActionResult> RemoveFromSongbook([FromBody] RemoveFromSongbookCommand command)
+        {
+
+        }
+
+        [HttpPost("reorder")]
+        public async Task<ActionResult> Reorder([FromBody] ReorderCommand command)
+        {
+
         }
 
         [HttpPost("generate")]
