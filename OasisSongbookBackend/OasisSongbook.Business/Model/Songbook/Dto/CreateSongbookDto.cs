@@ -7,6 +7,6 @@ namespace OasisSongbook.Business.Model.Songbook.Dto
         public string UserId { get; set; }
         public string Title { get; set; }
         public SongbookLayout Layout { get; set; }
-        public List<SongbookEntryDto> Entries { get; set; }
+        public List<CreateSongbookEntryDto> Entries { get; set; }
     }
 }

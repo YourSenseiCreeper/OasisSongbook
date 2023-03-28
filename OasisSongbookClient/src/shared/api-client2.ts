@@ -9,7 +9,7 @@
 // ReSharper disable InconsistentNaming
 
 import { mergeMap as _observableMergeMap, catchError as _observableCatch } from 'rxjs/operators';
-import { Observable, throwError as _observableThrow, of as _observableOf, of } from 'rxjs';
+import { Observable, throwError as _observableThrow, of as _observableOf } from 'rxjs';
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angular/common/http';
 
@@ -83,7 +83,7 @@ export class Service {
     /**
      * @return Success
      */
-    songGetAll(): Observable<Song[]> {
+    songGet(): Observable<Song[]> {
         let url_ = this.baseUrl + "/song";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -96,11 +96,11 @@ export class Service {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processSongGetAll(response_);
+            return this.processSongGet(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processSongGetAll(response_ as any);
+                    return this.processSongGet(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<Song[]>;
                 }
@@ -109,7 +109,7 @@ export class Service {
         }));
     }
 
-    protected processSongGetAll(response: HttpResponseBase): Observable<Song[]> {
+    protected processSongGet(response: HttpResponseBase): Observable<Song[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -135,7 +135,7 @@ export class Service {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf([]);
+        return _observableOf<Song[]>(null as any);
     }
 
     /**
@@ -198,10 +198,64 @@ export class Service {
     }
 
     /**
+     * @return Success
+     */
+    songbookGet(id: string): Observable<SongbookDto> {
+        let url_ = this.baseUrl + "/songbook/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSongbookGet(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSongbookGet(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<SongbookDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<SongbookDto>;
+        }));
+    }
+
+    protected processSongbookGet(response: HttpResponseBase): Observable<SongbookDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = SongbookDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<SongbookDto>(null as any);
+    }
+
+    /**
      * @param body (optional) 
      * @return Success
      */
-    songbook(body: CreateSongbookDto | undefined): Observable<void> {
+    songbookPost(body: CreateSongbookDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/songbook";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -213,16 +267,15 @@ export class Service {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
             })
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processSongbook(response_);
+            return this.processSongbookPost(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processSongbook(response_ as any);
+                    return this.processSongbookPost(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<void>;
                 }
@@ -231,7 +284,7 @@ export class Service {
         }));
     }
 
-    protected processSongbook(response: HttpResponseBase): Observable<void> {
+    protected processSongbookPost(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -305,7 +358,7 @@ export class Service {
     /**
      * @return Success
      */
-    usersGetAll(): Observable<User[]> {
+    usersGet(): Observable<User[]> {
         let url_ = this.baseUrl + "/users";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -318,11 +371,11 @@ export class Service {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processUsersGetAll(response_);
+            return this.processUsersGet(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processUsersGetAll(response_ as any);
+                    return this.processUsersGet(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<User[]>;
                 }
@@ -331,7 +384,7 @@ export class Service {
         }));
     }
 
-    protected processUsersGetAll(response: HttpResponseBase): Observable<User[]> {
+    protected processUsersGet(response: HttpResponseBase): Observable<User[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -357,7 +410,7 @@ export class Service {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf([]);
+        return _observableOf<User[]>(null as any);
     }
 
     /**
@@ -478,60 +531,6 @@ export class SongbookService {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    /**
-     * @return Success
-     */
-    songbookGet(id: string): Observable<SongbookDto> {
-        let url_ = this.baseUrl + "/songbook/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processSongbookGet(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processSongbookGet(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<SongbookDto>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<SongbookDto>;
-        }));
-    }
-
-    protected processSongbookGet(response: HttpResponseBase): Observable<SongbookDto> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = SongbookDto.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<SongbookDto>(null as any);
-    }
-    
     /**
      * @param body (optional) 
      * @return Success
@@ -741,164 +740,6 @@ export class SongbookService {
     }
 }
 
-export class SongbookDto implements ISongbookDto {
-    _id!: string | undefined;
-    title!: string | undefined;
-    authorId!: string | undefined;
-    layout!: SongbookLayout;
-    entries!: SongbookEntryDto[] | undefined;
-    docxFilesUrls!: string[] | undefined;
-    shareUrl!: string | undefined;
-
-    constructor(data?: ISongbookDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this._id = _data["_id"];
-            this.title = _data["title"];
-            this.authorId = _data["authorId"];
-            this.layout = _data["layout"];
-            if (Array.isArray(_data["entries"])) {
-                this.entries = [] as any;
-                for (let item of _data["entries"])
-                    this.entries!.push(SongbookEntryDto.fromJS(item));
-            }
-            if (Array.isArray(_data["docxFilesUrls"])) {
-                this.docxFilesUrls = [] as any;
-                for (let item of _data["docxFilesUrls"])
-                    this.docxFilesUrls!.push(item);
-            }
-            this.shareUrl = _data["shareUrl"];
-        }
-    }
-
-    static fromJS(data: any): SongbookDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new SongbookDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["_id"] = this._id;
-        data["title"] = this.title;
-        data["authorId"] = this.authorId;
-        data["layout"] = this.layout;
-        if (Array.isArray(this.entries)) {
-            data["entries"] = [];
-            for (let item of this.entries)
-                data["entries"].push(item.toJSON());
-        }
-        if (Array.isArray(this.docxFilesUrls)) {
-            data["docxFilesUrls"] = [];
-            for (let item of this.docxFilesUrls)
-                data["docxFilesUrls"].push(item);
-        }
-        data["shareUrl"] = this.shareUrl;
-        return data;
-    }
-
-    clone(): SongbookDto {
-        const json = this.toJSON();
-        let result = new SongbookDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ISongbookDto {
-    _id: string | undefined;
-    title: string | undefined;
-    authorId: string | undefined;
-    layout: SongbookLayout;
-    entries: SongbookEntryDto[] | undefined;
-    docxFilesUrls: string[] | undefined;
-    shareUrl: string | undefined;
-}
-
-export interface ISongbookEntry {
-    _id: string | undefined;
-    songId: string | undefined;
-    order: number;
-    customStyleOptions: { [key: string]: string; } | undefined;
-}
-
-export class SongbookEntryDto implements ISongbookEntryDto {
-    _id!: string | undefined;
-    songId: string | undefined;
-    song!: Song;
-    order!: number;
-    customStyleOptions!: { [key: string]: string; } | undefined;
-
-    constructor(data?: ISongbookEntryDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this._id = _data["_id"];
-            this.song = _data["song"] ? Song.fromJS(_data["song"]) : <any>undefined;
-            this.order = _data["order"];
-            if (_data["customStyleOptions"]) {
-                this.customStyleOptions = {} as any;
-                for (let key in _data["customStyleOptions"]) {
-                    if (_data["customStyleOptions"].hasOwnProperty(key))
-                        (<any>this.customStyleOptions)![key] = _data["customStyleOptions"][key];
-                }
-            }
-        }
-    }
-
-    static fromJS(data: any): SongbookEntryDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new SongbookEntryDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["_id"] = this._id;
-        data["song"] = this.song ? this.song.toJSON() : <any>undefined;
-        data["order"] = this.order;
-        if (this.customStyleOptions) {
-            data["customStyleOptions"] = {};
-            for (let key in this.customStyleOptions) {
-                if (this.customStyleOptions.hasOwnProperty(key))
-                    (<any>data["customStyleOptions"])[key] = (<any>this.customStyleOptions)[key];
-            }
-        }
-        return data;
-    }
-
-    clone(): SongbookEntryDto {
-        const json = this.toJSON();
-        let result = new SongbookEntryDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ISongbookEntryDto {
-    _id: string | undefined;
-    song: Song;
-    order: number;
-    customStyleOptions: { [key: string]: string; } | undefined;
-}
-
 export class AppendToSongbookCommand implements IAppendToSongbookCommand {
     songbookId!: string | undefined;
     songId!: string | undefined;
@@ -1056,7 +897,7 @@ export class CreateSongbookDto implements ICreateSongbookDto {
     userId!: string | undefined;
     title!: string | undefined;
     layout!: SongbookLayout;
-    entries!: SongbookEntryDto[] | undefined;
+    entries!: CreateSongbookEntryDto[] | undefined;
 
     constructor(data?: ICreateSongbookDto) {
         if (data) {
@@ -1075,7 +916,7 @@ export class CreateSongbookDto implements ICreateSongbookDto {
             if (Array.isArray(_data["entries"])) {
                 this.entries = [] as any;
                 for (let item of _data["entries"])
-                    this.entries!.push(SongbookEntryDto.fromJS(item));
+                    this.entries!.push(CreateSongbookEntryDto.fromJS(item));
             }
         }
     }
@@ -1112,7 +953,66 @@ export interface ICreateSongbookDto {
     userId: string | undefined;
     title: string | undefined;
     layout: SongbookLayout;
-    entries: SongbookEntryDto[] | undefined;
+    entries: CreateSongbookEntryDto[] | undefined;
+}
+
+export class CreateSongbookEntryDto implements ICreateSongbookEntryDto {
+    songId!: string | undefined;
+    customStyleOptions!: { [key: string]: string; } | undefined;
+
+    constructor(data?: ICreateSongbookEntryDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.songId = _data["songId"];
+            if (_data["customStyleOptions"]) {
+                this.customStyleOptions = {} as any;
+                for (let key in _data["customStyleOptions"]) {
+                    if (_data["customStyleOptions"].hasOwnProperty(key))
+                        (<any>this.customStyleOptions)![key] = _data["customStyleOptions"][key];
+                }
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateSongbookEntryDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateSongbookEntryDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["songId"] = this.songId;
+        if (this.customStyleOptions) {
+            data["customStyleOptions"] = {};
+            for (let key in this.customStyleOptions) {
+                if (this.customStyleOptions.hasOwnProperty(key))
+                    (<any>data["customStyleOptions"])[key] = (<any>this.customStyleOptions)[key];
+            }
+        }
+        return data;
+    }
+
+    clone(): CreateSongbookEntryDto {
+        const json = this.toJSON();
+        let result = new CreateSongbookEntryDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateSongbookEntryDto {
+    songId: string | undefined;
+    customStyleOptions: { [key: string]: string; } | undefined;
 }
 
 export class CreateSongDto implements ICreateSongDto {
@@ -1741,10 +1641,93 @@ export interface ISongbook {
     shareUrl: string | undefined;
 }
 
+export class SongbookDto implements ISongbookDto {
+    _id!: string | undefined;
+    title!: string | undefined;
+    authorId!: string | undefined;
+    layout!: SongbookLayout;
+    entries!: SongbookEntryDto[] | undefined;
+    docxFilesUrls!: string[] | undefined;
+    shareUrl!: string | undefined;
+
+    constructor(data?: ISongbookDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this._id = _data["_id"];
+            this.title = _data["title"];
+            this.authorId = _data["authorId"];
+            this.layout = _data["layout"];
+            if (Array.isArray(_data["entries"])) {
+                this.entries = [] as any;
+                for (let item of _data["entries"])
+                    this.entries!.push(SongbookEntryDto.fromJS(item));
+            }
+            if (Array.isArray(_data["docxFilesUrls"])) {
+                this.docxFilesUrls = [] as any;
+                for (let item of _data["docxFilesUrls"])
+                    this.docxFilesUrls!.push(item);
+            }
+            this.shareUrl = _data["shareUrl"];
+        }
+    }
+
+    static fromJS(data: any): SongbookDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new SongbookDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["_id"] = this._id;
+        data["title"] = this.title;
+        data["authorId"] = this.authorId;
+        data["layout"] = this.layout;
+        if (Array.isArray(this.entries)) {
+            data["entries"] = [];
+            for (let item of this.entries)
+                data["entries"].push(item.toJSON());
+        }
+        if (Array.isArray(this.docxFilesUrls)) {
+            data["docxFilesUrls"] = [];
+            for (let item of this.docxFilesUrls)
+                data["docxFilesUrls"].push(item);
+        }
+        data["shareUrl"] = this.shareUrl;
+        return data;
+    }
+
+    clone(): SongbookDto {
+        const json = this.toJSON();
+        let result = new SongbookDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ISongbookDto {
+    _id: string | undefined;
+    title: string | undefined;
+    authorId: string | undefined;
+    layout: SongbookLayout;
+    entries: SongbookEntryDto[] | undefined;
+    docxFilesUrls: string[] | undefined;
+    shareUrl: string | undefined;
+}
+
 export class SongbookEntry implements ISongbookEntry {
     _id!: string | undefined;
-    order: number;
     songId!: string | undefined;
+    order!: number;
     customStyleOptions!: { [key: string]: string; } | undefined;
 
     constructor(data?: ISongbookEntry) {
@@ -1760,6 +1743,7 @@ export class SongbookEntry implements ISongbookEntry {
         if (_data) {
             this._id = _data["_id"];
             this.songId = _data["songId"];
+            this.order = _data["order"];
             if (_data["customStyleOptions"]) {
                 this.customStyleOptions = {} as any;
                 for (let key in _data["customStyleOptions"]) {
@@ -1781,6 +1765,7 @@ export class SongbookEntry implements ISongbookEntry {
         data = typeof data === 'object' ? data : {};
         data["_id"] = this._id;
         data["songId"] = this.songId;
+        data["order"] = this.order;
         if (this.customStyleOptions) {
             data["customStyleOptions"] = {};
             for (let key in this.customStyleOptions) {
@@ -1802,11 +1787,74 @@ export class SongbookEntry implements ISongbookEntry {
 export interface ISongbookEntry {
     _id: string | undefined;
     songId: string | undefined;
+    order: number;
     customStyleOptions: { [key: string]: string; } | undefined;
 }
 
+export class SongbookEntryDto implements ISongbookEntryDto {
+    _id!: string | undefined;
+    song!: Song;
+    order!: number;
+    customStyleOptions!: { [key: string]: string; } | undefined;
+
+    constructor(data?: ISongbookEntryDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this._id = _data["_id"];
+            this.song = _data["song"] ? Song.fromJS(_data["song"]) : <any>undefined;
+            this.order = _data["order"];
+            if (_data["customStyleOptions"]) {
+                this.customStyleOptions = {} as any;
+                for (let key in _data["customStyleOptions"]) {
+                    if (_data["customStyleOptions"].hasOwnProperty(key))
+                        (<any>this.customStyleOptions)![key] = _data["customStyleOptions"][key];
+                }
+            }
+        }
+    }
+
+    static fromJS(data: any): SongbookEntryDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new SongbookEntryDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["_id"] = this._id;
+        data["song"] = this.song ? this.song.toJSON() : <any>undefined;
+        data["order"] = this.order;
+        if (this.customStyleOptions) {
+            data["customStyleOptions"] = {};
+            for (let key in this.customStyleOptions) {
+                if (this.customStyleOptions.hasOwnProperty(key))
+                    (<any>data["customStyleOptions"])[key] = (<any>this.customStyleOptions)[key];
+            }
+        }
+        return data;
+    }
+
+    clone(): SongbookEntryDto {
+        const json = this.toJSON();
+        let result = new SongbookEntryDto();
+        result.init(json);
+        return result;
+    }
+}
+
 export interface ISongbookEntryDto {
-    songId: string | undefined;
+    _id: string | undefined;
+    song: Song;
+    order: number;
     customStyleOptions: { [key: string]: string; } | undefined;
 }
 
@@ -1956,7 +2004,7 @@ export interface IVerse {
 }
 
 export class ApiException extends Error {
-    // message: string;
+    message: string;
     status: number;
     response: string;
     headers: { [key: string]: any; };

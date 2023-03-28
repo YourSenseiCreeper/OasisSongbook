@@ -1,23 +1,35 @@
-import { Component, Inject, Optional } from '@angular/core';
+import { Component, EventEmitter, Inject, OnDestroy, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Dialog } from '@angular/cdk/dialog';
-import { AppendToSongbookCommand, ArrangementEntry, ReorderCommand, Song, SongbookService } from 'src/shared/api-client';
+import { AppendToSongbookCommand, ArrangementEntry, GenerateSongbookCommand, ReorderCommand, Song, SongbookService } from 'src/shared/api-client';
 import { EditSongStyleDialogComponent } from '../songs-collection/edit-song-style-dialog/edit-song-style-dialog.component';
 import { API_CURRENT_SONGBOOK_ID, API_CURRENT_USER_ID } from 'src/shared/environment-consts';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'songbook',
   templateUrl: './songbook.component.html',
   styleUrls: ['./songbook.component.scss']
 })
-export class SongbookComponent {
+export class SongbookComponent implements OnInit, OnDestroy {
   showFiller = false;
   selectedSongs: Song[] = [];
+  destroy$ = new EventEmitter<any>();
 
   constructor(public dialog: Dialog,
     private service: SongbookService,
     @Inject(API_CURRENT_USER_ID) private currentUserId?: string,
     @Inject(API_CURRENT_SONGBOOK_ID) private currentSongbookId?: string) { }
+  
+  ngOnInit(): void {
+    this.service.songbookGet(this.currentSongbookId!).subscribe(v => {
+      this.selectedSongs = v.entries!.map(e => e.song!);
+    })
+  }
+  
+  ngOnDestroy(): void {
+    this.destroy$.emit();
+  }
 
   drop(event: CdkDragDrop<Song[]>) {
     if (event.previousContainer === event.container) {
@@ -45,6 +57,19 @@ export class SongbookComponent {
       this.service.append(appendCommand);
     }
 
+  }
+
+  generate() {
+    let command = { songbookId: this.currentSongbookId, userId: this.currentUserId } as GenerateSongbookCommand;
+    this.service.generate(command).pipe(takeUntil(this.destroy$)).subscribe((data) => {
+      // let blob = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+
+      // var downloadURL = window.URL.createObjectURL(data);
+      // var link = document.createElement('a');
+      // link.href = downloadURL;
+      // link.download = "spiewnik.docx";
+      // link.click();
+    });
   }
 
   getArrangement(arrangement: ArrangementEntry[]): string {

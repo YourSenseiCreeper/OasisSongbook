@@ -31,15 +31,39 @@ namespace OasisSongbookBackend.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetById(string songbookId)
+        public async Task<ActionResult<SongbookDto>> GetById(string id)
         {
             // pobranie current user id i sprawdzenie czy ma dostęp 
-            var songbook = await _context.Songbooks.Get(songbookId);
+            var songbook = await _context.Songbooks.Get(id);
             if (songbook == null)
-                return new BadRequestObjectResult($"Not found songbook with id: '{songbookId}'");
+                return new BadRequestObjectResult($"Not found songbook with id: '{id}'");
 
-            songbook.Entries = songbook.Entries.OrderBy(e => e.Order).ToList();
-            return Ok(songbook);
+            var songbookDto = new SongbookDto
+            {
+                _id = songbook._id,
+                Title = songbook.Title,
+                AuthorId = songbook.AuthorId,
+                Layout = songbook.Layout,
+                ShareUrl = songbook.ShareUrl,
+                DocxFilesUrls = songbook.DocxFilesUrls,
+                Entries = new List<SongbookEntryDto>()
+            };
+
+            var songsEntries = songbook.Entries.OrderBy(e => e.Order).ToList();
+            var songs = await _context.Songs.Query(Builders<Song>.Filter.In(s => s._id, songsEntries.Select(e => e.SongId)));
+
+            foreach (var songEntry in songsEntries)
+            {
+                var song = songs.First(s => s._id == songEntry.SongId);
+                songbookDto.Entries.Add(new SongbookEntryDto
+                {
+                    _id = songEntry._id,
+                    Order = songEntry.Order,
+                    CustomStyleOptions = songEntry.CustomStyleOptions,
+                    Song = song,
+                });
+            }
+            return Ok(songbookDto);
         }
 
         [HttpPost("append")]
@@ -102,6 +126,7 @@ namespace OasisSongbookBackend.WebApi.Controllers
         public async Task<ActionResult> Reorder([FromBody] ReorderCommand command)
         {
             //current user
+            // sprawdzanie praw własności do śpiewnika
             var user = await _context.Users.Get(command.UserId);
             if (user == null)
                 return new BadRequestObjectResult($"Not found user with id: '{command.UserId}'");
@@ -118,7 +143,7 @@ namespace OasisSongbookBackend.WebApi.Controllers
             if (entry == null)
                 return new BadRequestObjectResult($"Not found song with id: '{command.SongId}' in songbook {command.SongbookId}");
 
-            var filter = Builders<Songbook>.Filter.Eq(u => u._id, command.UserId);
+            var filter = Builders<Songbook>.Filter.Eq(s => s._id, command.SongbookId);
             var update = Builders<Songbook>.Update.Pull(nameof(Songbook.Entries), entry);
             await _context.Songbooks.Update(filter, update);
 
@@ -128,15 +153,21 @@ namespace OasisSongbookBackend.WebApi.Controllers
         }
 
         [HttpPost("generate")]
-        public async Task<ActionResult> Generate([FromBody] GenerateSongbookCommand command)
+        public async Task<FileContentResult> Generate([FromBody] GenerateSongbookCommand command)
         {
             var user = await _context.Users.Get(command.UserId);
             if (user == null)
-                return new BadRequestObjectResult($"Not found user with id: '{command.UserId}'");
+            {
+                //return new BadRequestObjectResult($"Not found user with id: '{command.UserId}'");
+                return null;
+            }
 
-            var songbook = user.Songbooks.FirstOrDefault(s => s._id == command.SongbookId);
+            var songbook = await _context.Songbooks.Get(command.SongbookId);
             if (songbook == null)
-                return new BadRequestObjectResult($"Not found songbook with id: '{command.SongbookId}'");
+            {
+                //return new BadRequestObjectResult($"Not found songbook with id: '{command.SongbookId}'");
+                return null;
+            }
 
             var songIds = songbook.Entries.Select(e => e.SongId).ToHashSet();
             var songs = await _context.Songs.GetAll();
