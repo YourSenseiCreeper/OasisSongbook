@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OasisSongbook.Business\OasisSongbook.Business.csproj" />
+    <ProjectReference Include="..\..\src\OasisSongbook.Business\OasisSongbook.Business.csproj" />
   </ItemGroup>
 
 </Project>

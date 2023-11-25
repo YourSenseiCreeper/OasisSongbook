@@ -3,13 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OasisSongbookBackend.WebApi", "OasisSongbookBackend.WebApi\OasisSongbookBackend.WebApi.csproj", "{83EE86EB-ACB5-4E36-A5C2-C92B69E8A3D1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F560E3B3-CB20-4466-8FE7-8CC963ECCA80}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OasisSongbook.Business", "OasisSongbook.Business\OasisSongbook.Business.csproj", "{85CBD676-A466-4BAC-AC33-26124C8F2F83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OasisSongbook.Business", "src\OasisSongbook.Business\OasisSongbook.Business.csproj", "{D718B9FE-70AF-4784-8330-D49EF894053A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OasisSongbook.Tests", "OasisSongbook.Tests\OasisSongbook.Tests.csproj", "{8C63BAD4-4BF9-4278-8D02-12B7C228C873}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OasisSongbook.WebApi", "src\OasisSongbook.WebApi\OasisSongbook.WebApi.csproj", "{7A480A21-B35C-49BD-AC7A-D0756DDF29C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OasisSongbook.Seeder", "OasisSongbook.Seeder\OasisSongbook.Seeder.csproj", "{DF4D2BDD-BD29-49C2-8C2A-AB007FC34C16}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CE4FE627-1494-4FB8-8089-FA62F382B3EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{5AC0BC9A-7C72-4397-B354-4CD65B33CE1B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OasisSongbook.Seeder", "tools\OasisSongbook.Seeder\OasisSongbook.Seeder.csproj", "{1CB094A7-8897-420E-B190-AD491FE408B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OasisSongbook.Domain", "src\OasisSongbook.Domain\OasisSongbook.Domain.csproj", "{33559F6B-83D8-4703-AF79-ADD4BC3E9DB3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OasisSongbook.Tests", "tests\OasisSongbook.Tests\OasisSongbook.Tests.csproj", "{A7FB0E03-8036-43EF-8F07-258E384EEB94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,25 +25,36 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{83EE86EB-ACB5-4E36-A5C2-C92B69E8A3D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83EE86EB-ACB5-4E36-A5C2-C92B69E8A3D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83EE86EB-ACB5-4E36-A5C2-C92B69E8A3D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83EE86EB-ACB5-4E36-A5C2-C92B69E8A3D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{85CBD676-A466-4BAC-AC33-26124C8F2F83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85CBD676-A466-4BAC-AC33-26124C8F2F83}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85CBD676-A466-4BAC-AC33-26124C8F2F83}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85CBD676-A466-4BAC-AC33-26124C8F2F83}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8C63BAD4-4BF9-4278-8D02-12B7C228C873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C63BAD4-4BF9-4278-8D02-12B7C228C873}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C63BAD4-4BF9-4278-8D02-12B7C228C873}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C63BAD4-4BF9-4278-8D02-12B7C228C873}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DF4D2BDD-BD29-49C2-8C2A-AB007FC34C16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF4D2BDD-BD29-49C2-8C2A-AB007FC34C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF4D2BDD-BD29-49C2-8C2A-AB007FC34C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF4D2BDD-BD29-49C2-8C2A-AB007FC34C16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D718B9FE-70AF-4784-8330-D49EF894053A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D718B9FE-70AF-4784-8330-D49EF894053A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D718B9FE-70AF-4784-8330-D49EF894053A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D718B9FE-70AF-4784-8330-D49EF894053A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A480A21-B35C-49BD-AC7A-D0756DDF29C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A480A21-B35C-49BD-AC7A-D0756DDF29C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A480A21-B35C-49BD-AC7A-D0756DDF29C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A480A21-B35C-49BD-AC7A-D0756DDF29C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CB094A7-8897-420E-B190-AD491FE408B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CB094A7-8897-420E-B190-AD491FE408B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CB094A7-8897-420E-B190-AD491FE408B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CB094A7-8897-420E-B190-AD491FE408B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33559F6B-83D8-4703-AF79-ADD4BC3E9DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33559F6B-83D8-4703-AF79-ADD4BC3E9DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33559F6B-83D8-4703-AF79-ADD4BC3E9DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33559F6B-83D8-4703-AF79-ADD4BC3E9DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7FB0E03-8036-43EF-8F07-258E384EEB94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7FB0E03-8036-43EF-8F07-258E384EEB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7FB0E03-8036-43EF-8F07-258E384EEB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7FB0E03-8036-43EF-8F07-258E384EEB94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D718B9FE-70AF-4784-8330-D49EF894053A} = {F560E3B3-CB20-4466-8FE7-8CC963ECCA80}
+		{7A480A21-B35C-49BD-AC7A-D0756DDF29C2} = {F560E3B3-CB20-4466-8FE7-8CC963ECCA80}
+		{1CB094A7-8897-420E-B190-AD491FE408B1} = {5AC0BC9A-7C72-4397-B354-4CD65B33CE1B}
+		{33559F6B-83D8-4703-AF79-ADD4BC3E9DB3} = {F560E3B3-CB20-4466-8FE7-8CC963ECCA80}
+		{A7FB0E03-8036-43EF-8F07-258E384EEB94} = {CE4FE627-1494-4FB8-8089-FA62F382B3EF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E15C1DB-C769-4867-8E73-DAA295C4175A}
