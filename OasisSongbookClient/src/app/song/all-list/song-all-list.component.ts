@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { Observable, takeUntil } from 'rxjs';
-import { Service, Song } from 'src/shared/api-client';
+import { Song, SongService } from 'src/shared/api-client';
 
 @Component({
   selector: 'song-all-list',
@@ -12,11 +12,11 @@ export class SongAllListComponent implements OnInit, OnDestroy {
   displayedSongs$: Observable<Song[]>;
   destroy$ = new EventEmitter<any>();
 
-  constructor(private songService: Service) {}
+  constructor(private songService: SongService) {}
   
 
   ngOnInit(): void {
-    this.displayedSongs$ = this.songService.songGetAll().pipe(takeUntil(this.destroy$))
+    this.displayedSongs$ = this.songService.all().pipe(takeUntil(this.destroy$))
   }
 
   ngOnDestroy(): void {

@@ -28,7 +28,7 @@ namespace OasisSongbookBackend.WebApi.Controllers
             return new OkResult();
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<IEnumerable<Song>> GetAll()
         {
             var songs = await _context.Songs.GetAll();

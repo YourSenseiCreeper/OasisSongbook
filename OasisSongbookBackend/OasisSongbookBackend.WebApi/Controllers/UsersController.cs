@@ -29,7 +29,7 @@ namespace OasisSongbookBackend.WebApi.Controllers
             await _userSevice.CreateUser(userDto);
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<IEnumerable<User>> GetAll()
         {
             return await _context.Users.GetAll();
