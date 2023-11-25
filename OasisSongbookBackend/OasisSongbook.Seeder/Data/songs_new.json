@@ -1,227 +1,566 @@
 [
-    {
-        "_id": "64208269675046ae30113fdb",
-        "Title": "Duchu Święty przyjdź",
-        "Author": "admin",
-        "AuthorId": "64208269675046ae30113fda",
-        "ModificationHistory": [],
-        "SuggestedBpm": 120,
-        "Arrangements": [
-            "Guitar"
-        ],
-        "Verses": [
-            {
-                "Repetitions": null,
-                "Lines": [
-                    {
-                        "Text": "Duchu Święty przyjdź",
-                        "Repetitions": 4,
-                        "GuitarArrangement": [
-                            {
-                                "StartIndex": 10,
-                                "Note": "D"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "A"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "D"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "D"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "G"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "A"
-                            }
-                        ]
-                    },
-                    {
-                        "Text": "Niech wiara zagości",
-                        "GuitarArrangement": [
-                            {
-                                "StartIndex": 10,
-                                "Note": "G"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "D"
-                            }
-                        ]
-                    },
-                    {
-                        "Text": "Nadzieja zagości",
-                        "GuitarArrangement": [
-                            {
-                                "StartIndex": 10,
-                                "Note": "G"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "D"
-                            }
-                        ]
-                    },
-                    {
-                        "Text": "Niech miłość zagości w nas",
-                        "Repetitions": 2,
-                        "GuitarArrangement": [
-                            {
-                                "StartIndex": 10,
-                                "Note": "G"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "D"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "A"
-                            }
-                        ]
-                    }
-                ]
-            }
+  {
+    "_id": "64208269675046ae30113fdb",
+    "Title": "Duchu Święty przyjdź",
+    "Author": "admin",
+    "AuthorId": "64208269675046ae30113fda",
+    "ModificationHistory": [],
+    "SuggestedBpm": 120,
+    "Arrangements": [
+      "Guitar"
+    ],
+    "Verses": [
+      {
+        "Repetitions": null,
+        "Lines": [
+          {
+            "Text": "Duchu Święty przyjdź",
+            "Repetitions": 4,
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "A"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "G"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "A"
+              }
+            ]
+          },
+          {
+            "Text": "Niech wiara zagości",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "G"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "Nadzieja zagości",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "G"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "Niech miłość zagości w nas",
+            "Repetitions": 2,
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "G"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "A"
+              }
+            ]
+          }
         ]
-    },
-    {
-        "_id": "64208269675046ae30113fdc",
-        "Title": "Duchu Święty wołam przyjdź",
-        "Author": "admin",
-        "AuthorId": "64208269675046ae30113fda",
-        "ModificationHistory": [],
-        "SuggestedBpm": 120,
-        "Verses": [
-            {
-                "Repetitions": null,
-                "Lines": [
-                    {
-                        "Text": "Duchu Święty wołam przyjdź",
-                        "Repetitions": 2,
-                        "GuitarArrangement": [
-                            {
-                                "StartIndex": 10,
-                                "Note": "D"
-                            }
-                        ]
-                    },
-                    {
-                        "Text": "Bądź jak ogień w duszy mej",
-                        "GuitarArrangement": [
-                            {
-                                "StartIndex": 10,
-                                "Note": "a"
-                            }
-                        ]
-                    },
-                    {
-                        "Text": "Bądź jak ogień w ciele mym",
-                        "GuitarArrangement": [
-                            {
-                                "StartIndex": 10,
-                                "Note": "G"
-                            }
-                        ]
-                    },
-                    {
-                        "Text": "Rozpal mnie.",
-                        "GuitarArrangement": [
-                            {
-                                "StartIndex": 10,
-                                "Note": "D"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "G"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "D"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "Repetitions": null,
-                "Lines": [
-                    {
-                        "Text": "Wszechmogący Bóg jest pośród nas",
-                        "GuitarArrangement": [
-                            {
-                                "StartIndex": 10,
-                                "Note": "a7"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "G"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "D"
-                            }
-                        ]
-                    },
-                    {
-                        "Text": "Miłosierdzie Jego wielkie jest.",
-                        "GuitarArrangement": [
-                            {
-                                "StartIndex": 10,
-                                "Note": "a7"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "G"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "D"
-                            }
-                        ]
-                    },
-                    {
-                        "Text": "Okazuje dobroć swoją dziś",
-                        "GuitarArrangement": [
-                            {
-                                "StartIndex": 10,
-                                "Note": "a7"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "G"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "D"
-                            }
-                        ]
-                    },
-                    {
-                        "Text": "Dla tych, którzy chcą miłować Go.",
-                        "GuitarArrangement": [
-                            {
-                                "StartIndex": 10,
-                                "Note": "a7"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "G"
-                            },
-                            {
-                                "StartIndex": 10,
-                                "Note": "D"
-                            }
-                        ]
-                    }
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "_id": "64208269675046ae30113fdc",
+    "Title": "Duchu Święty wołam przyjdź",
+    "Author": "admin",
+    "AuthorId": "64208269675046ae30113fda",
+    "ModificationHistory": [],
+    "SuggestedBpm": 120,
+    "Verses": [
+      {
+        "Repetitions": null,
+        "Lines": [
+          {
+            "Text": "Duchu Święty wołam przyjdź",
+            "Repetitions": 2,
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "Bądź jak ogień w duszy mej",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a"
+              }
+            ]
+          },
+          {
+            "Text": "Bądź jak ogień w ciele mym",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "G"
+              }
+            ]
+          },
+          {
+            "Text": "Rozpal mnie.",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "G"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          }
         ]
-    }
+      },
+      {
+        "Repetitions": null,
+        "Lines": [
+          {
+            "Text": "Wszechmogący Bóg jest pośród nas",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "G"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "Miłosierdzie Jego wielkie jest.",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "G"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "Okazuje dobroć swoją dziś",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "G"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "Dla tych, którzy chcą miłować Go.",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "G"
+              },
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "64208269675046ae30113fdd",
+    "Title": "Uwielbiam imię Twoje Panie",
+    "Author": "admin",
+    "AuthorId": "64208269675046ae30113fda",
+    "ModificationHistory": [],
+    "SuggestedBpm": 130,
+    "Verses": [
+      {
+        "Repetitions": null,
+        "Lines": [
+          {
+            "Text": "Uwielbiam imię Twoje Panie",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "Wywyższam Cię i daję Ci hodł",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a"
+              }
+            ]
+          },
+          {
+            "Text": "W przedsionku chwały Twej staję",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "G"
+              }
+            ]
+          },
+          {
+            "Text": "Z radością śpiewam Ci pieśń",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Repetitions": null,
+        "Lines": [
+          {
+            "Text": "O Panie Jezu, chcę wyznać że",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              }
+            ]
+          },
+          {
+            "Text": "Ja kocham Ciebie, Ty zmieniasz mnie",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              }
+            ]
+          },
+          {
+            "Text": "Chcę Ci dziękować ze wszystkich sił",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              }
+            ]
+          },
+          {
+            "Text": "Dajesz mi Siebie bym na wieki żył",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "64208269675046ae30113fde",
+    "Title": "Jezus siłą mą",
+    "Author": "admin",
+    "AuthorId": "64208269675046ae30113fda",
+    "ModificationHistory": [],
+    "SuggestedBpm": 110,
+    "Verses": [
+      {
+        "Repetitions": null,
+        "Lines": [
+          {
+            "Text": "Jezus daje nam zbawienie",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "Jezus daje pokój nam",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a"
+              }
+            ]
+          },
+          {
+            "Text": "Jemu składam dziękczynienie",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "G"
+              }
+            ]
+          },
+          {
+            "Text": "chwałę z serca mego dam",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Repetitions": null,
+        "Lines": [
+          {
+            "Text": "Jezus siłą mą, Jezus pieśnią mego życia",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              }
+            ]
+          },
+          {
+            "Text": "Królem wiecznym On, niepojęty w mocy swej",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              }
+            ]
+          },
+          {
+            "Text": "w Nim znalazłem to, czego szukałem do dzisiaj",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              }
+            ]
+          },
+          {
+            "Text": "sam mi podał dłoń, bym zwyciężał w każdy dzień",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Repetitions": null,
+        "Lines": [
+          {
+            "Text": "W Jego ranach uzdrowienie",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              }
+            ]
+          },
+          {
+            "Text": "W Jego śmierci życia dar",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              }
+            ]
+          },
+          {
+            "Text": "Jego krew to oczyszczenie",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              }
+            ]
+          },
+          {
+            "Text": "Jego życie chwałą nam",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a7"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "64208269675046ae30113fde",
+    "Title": "Jezus siłą mą",
+    "Author": "admin",
+    "AuthorId": "64208269675046ae30113fe0",
+    "ModificationHistory": [],
+    "SuggestedBpm": 110,
+    "Verses": [
+      {
+        "Repetitions": null,
+        "Lines": [
+          {
+            "Text": "Niechaj zstąpi Duch Twój",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "i odnowi ziemię.",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "a"
+              }
+            ]
+          },
+          {
+            "Text": "Życiodajny spłynie deszcz",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "G"
+              }
+            ]
+          },
+          {
+            "Text": "na spragnione serce",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "Obmyj mnie i uświęć mnie",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "uwielbienia niech popłynie pieśń",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "Chwała Jezusowi",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "który za mnie życie dał.",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "Chwała Temu",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "który pierwszy umiłował mnie.",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          },
+          {
+            "Text": "Jezus, tylko Jezus Panem jest",
+            "GuitarArrangement": [
+              {
+                "StartIndex": 10,
+                "Note": "D"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 ]

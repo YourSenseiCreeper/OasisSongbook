@@ -1,0 +1,49 @@
+{
+    "_id": "64208269675046ae30113fdb",
+    "Title": "Duchu Święty przyjdź",
+    "Author": "admin",
+    "AuthorId": "64208269675046ae30113fda",
+    "ModificationHistory": [],
+    "SuggestedBpm": 120,
+    "Arrangments": [
+        {
+            "Name": "Gitara",
+            "Type": "Guitar",
+            "ArrangmentId": 1234
+        },
+        {
+            "_comment": "Pole name jest w razie np. instrumentu, którego nie przewiduje baza",
+            "Name": "Bęben",
+            "Type": "Drums",
+            "ArrangmentId": 1234
+        }
+    ],
+    "Verses": [
+        {
+            "IsChorus": false,
+            "Lines": [
+                {
+                    "Text": "Duchu Święty przyjdź",
+                    "Repetitions": 4
+                }
+            ]
+        },
+        {
+            "IsChorus": true,
+            "Lines": [
+                {
+                    "Text": "Niech wiara zagości",
+                    "Repetitions": 1
+                },
+                {
+                    "Text": "Nadzieja zagości",
+                    "Repetitions": 1
+                },
+                {
+                    "Text": "Niech miłość zagości w nas",
+                    "Repetitions": 2
+                }
+            ]
+        }
+    ]
+}

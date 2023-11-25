@@ -1,0 +1,126 @@
+{
+  "AuthorId": 1234,
+  "Type": "Guitar",
+  "Notes": [
+    {
+        "VerseIndex": 0,
+        "VerseRepetitionNumber": null,
+        "LineIndex": 0,
+        "LineRepetitionNumber": null,
+        "StartTextMarker": 0,
+        "EndTextMarker": 10,
+        "Region": "0_0-0_0-0:10",
+        "Note": "D"
+    },
+    {
+        "VerseIndex": 0,
+        "VerseRepetitionNumber": null,
+        "LineIndex": 0,
+        "LineRepetitionNumber": null,
+        "StartTextMarker": 10,
+        "EndTextMarker": 25,
+        "Region": "0_0-0_0-10:25",
+        "Note": "A"
+    },
+    {
+        "VerseIndex": 0,
+        "VerseRepetitionNumber": null,
+        "LineIndex": 0,
+        "LineRepetitionNumber": null,
+        "StartTextMarker": 10,
+        "EndTextMarker": 25,
+        "Region": "0_0-0_0-10:25",
+        "Note": "D"
+    },
+    {
+        "VerseIndex": 0,
+        "VerseRepetitionNumber": null,
+        "LineIndex": 0,
+        "LineRepetitionNumber": null,
+        "StartTextMarker": 10,
+        "EndTextMarker": 25,
+        "Region": "0_0-0_0-10:25",
+        "Note": "G"
+    },
+    {
+        "VerseIndex": 0,
+        "VerseRepetitionNumber": null,
+        "LineIndex": 0,
+        "LineRepetitionNumber": null,
+        "StartTextMarker": 10,
+        "EndTextMarker": 25,
+        "Region": "0_0-0_0-10:25",
+        "Note": "A"
+    },
+    {
+        "VerseIndex": 1,
+        "VerseRepetitionNumber": null,
+        "LineIndex": 1,
+        "LineRepetitionNumber": null,
+        "StartTextMarker": 10,
+        "EndTextMarker": 25,
+        "Region": "0_0-0_0-10:25",
+        "Note": "G"
+    },
+    {
+        "VerseIndex": 1,
+        "VerseRepetitionNumber": null,
+        "LineIndex": 1,
+        "LineRepetitionNumber": null,
+        "StartTextMarker": 10,
+        "EndTextMarker": 25,
+        "Region": "1_null-1_null-10:25",
+        "Note": "D"
+    },
+    {
+        "VerseIndex": 1,
+        "VerseRepetitionNumber": null,
+        "LineIndex": 2,
+        "LineRepetitionNumber": null,
+        "StartTextMarker": 10,
+        "EndTextMarker": 25,
+        "Region": "0_0-0_0-10:25",
+        "Note": "G"
+    },
+    {
+        "VerseIndex": 1,
+        "VerseRepetitionNumber": null,
+        "LineIndex": 2,
+        "LineRepetitionNumber": null,
+        "StartTextMarker": 10,
+        "EndTextMarker": 25,
+        "Region": "0_0-0_0-10:25",
+        "Note": "D"
+    },
+    {
+        "VerseIndex": 1,
+        "VerseRepetitionNumber": null,
+        "LineIndex": 3,
+        "LineRepetitionNumber": null,
+        "StartTextMarker": 10,
+        "EndTextMarker": 25,
+        "Region": "0_0-0_0-10:25",
+        "Note": "G"
+    },
+    {
+        "VerseIndex": 1,
+        "VerseRepetitionNumber": null,
+        "LineIndex": 3,
+        "LineRepetitionNumber": null,
+        "StartTextMarker": 10,
+        "EndTextMarker": 25,
+        "Region": "0_0-0_0-10:25",
+        "Note": "D"
+    },
+    {
+        "VerseIndex": 1,
+        "VerseRepetitionNumber": null,
+        "LineIndex": 3,
+        "LineRepetitionNumber": null,
+        "StartTextMarker": 10,
+        "EndTextMarker": 25,
+        "Region": "0_0-0_0-10:25",
+        "Note": "A"
+    }
+  ]
+}
