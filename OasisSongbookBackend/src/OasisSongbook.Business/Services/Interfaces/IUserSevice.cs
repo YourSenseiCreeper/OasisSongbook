@@ -1,5 +1,4 @@
-﻿using OasisSongbook.Business.Model;
-using OasisSongbook.Business.Model.Dto;
+﻿using OasisSongbook.Domain.Dto;
 
 namespace OasisSongbook.Business.Services.Interfaces
 {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using OasisSongbook.Business.Model.Songbook;
 using OasisSongbook.Business.Services.Interfaces;
 using OasisSongbook.Business.Services.Options;
+using OasisSongbook.Domain.Songbook;
 using SharpDocx;
 
 namespace OasisSongbook.Business.Services

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using OasisSongbook.Business.Context.Collection.Base;
-using OasisSongbook.Business.Model;
-using OasisSongbook.Business.Model.Song;
-using OasisSongbook.Business.Model.Songbook;
+using OasisSongbook.Domain;
+using OasisSongbook.Domain.Song;
+using OasisSongbook.Domain.Songbook;
 
 namespace OasisSongbook.Business.Context
 {

@@ -1,7 +1,7 @@
 ﻿using OasisSongbook.Business.Context;
 using OasisSongbook.Business.Mappers;
-using OasisSongbook.Business.Model.Dto;
 using OasisSongbook.Business.Services.Interfaces;
+using OasisSongbook.Domain.Dto;
 
 namespace OasisSongbook.Business.Services
 {

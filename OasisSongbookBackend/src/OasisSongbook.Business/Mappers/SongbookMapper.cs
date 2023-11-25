@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
-using OasisSongbook.Business.Model.Songbook;
-using OasisSongbook.Business.Model.Songbook.Dto;
+using OasisSongbook.Domain.Songbook;
+using OasisSongbook.Domain.Songbook.Dto;
 
 namespace OasisSongbook.Business.Mappers
 {

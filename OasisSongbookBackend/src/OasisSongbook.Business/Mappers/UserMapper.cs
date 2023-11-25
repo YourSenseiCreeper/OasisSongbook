@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
-using OasisSongbook.Business.Model;
-using OasisSongbook.Business.Model.Dto;
+using OasisSongbook.Domain;
+using OasisSongbook.Domain.Dto;
+using OasisSongbook.Domain.Songbook;
 
 namespace OasisSongbook.Business.Mappers
 {
@@ -15,7 +16,7 @@ namespace OasisSongbook.Business.Mappers
                 Name = dto.Name,
                 Role = dto.Role,
                 IsActive = dto.IsActive,
-                Songbooks = new List<Model.Songbook.Songbook>()
+                Songbooks = new List<Songbook>()
             };
         }
     }

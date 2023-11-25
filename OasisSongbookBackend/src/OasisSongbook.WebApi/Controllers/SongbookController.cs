@@ -3,12 +3,12 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using OasisSongbook.Business.Context;
 using OasisSongbook.Business.Mappers;
-using OasisSongbook.Business.Model;
-using OasisSongbook.Business.Model.Enum;
-using OasisSongbook.Business.Model.Song;
-using OasisSongbook.Business.Model.Songbook;
-using OasisSongbook.Business.Model.Songbook.Dto;
 using OasisSongbook.Business.Services.Interfaces;
+using OasisSongbook.Domain;
+using OasisSongbook.Domain.Enum;
+using OasisSongbook.Domain.Song;
+using OasisSongbook.Domain.Songbook;
+using OasisSongbook.Domain.Songbook.Dto;
 using OasisSongbookBackend.WebApi.Commands.Songbook;
 
 namespace OasisSongbookBackend.WebApi.Controllers
@@ -213,7 +213,7 @@ namespace OasisSongbookBackend.WebApi.Controllers
 
             var songbook = command.ToSongbook();
             var filter = Builders<User>.Filter.Eq(u => u._id, command.UserId);
-            var update = Builders<User>.Update.AddToSet(nameof(OasisSongbook.Business.Model.User.Songbooks), songbook);
+            var update = Builders<User>.Update.AddToSet(nameof(OasisSongbook.Domain.User.Songbooks), songbook);
             await _context.Users.Update(filter, update);
 
             return new OkResult();

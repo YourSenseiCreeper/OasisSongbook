@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using OasisSongbook.Business.Context;
-using OasisSongbook.Business.Model.Song;
-using OasisSongbook.Business.Model.Song.Dto;
 using OasisSongbook.Business.Mappers;
+using OasisSongbook.Domain.Song;
+using OasisSongbook.Domain.Song.Dto;
 
 namespace OasisSongbookBackend.WebApi.Controllers
 {
